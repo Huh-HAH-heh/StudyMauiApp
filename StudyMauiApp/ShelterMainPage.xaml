@@ -55,7 +55,7 @@
 
                 <HorizontalStackLayout Grid.Column="1" Spacing="8">
                     <Button Text="Login"
-         Clicked="OnHomeClicked"
+         Clicked="OnLoginClicked"
          BackgroundColor="#2F80ED"
          TextColor="White"
          CornerRadius="8"
