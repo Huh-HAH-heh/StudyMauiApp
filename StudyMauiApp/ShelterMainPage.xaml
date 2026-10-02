@@ -54,8 +54,9 @@
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout Grid.Column="1" Spacing="8">
-                    <Button Text="Login"
-                            Clicked="OnLoginClicked"
+                    <Button
+                            x:Name="LoginButton"
+                            Text="Login"
                             BackgroundColor="#2F80ED"
                             TextColor="White"
                             CornerRadius="8"
