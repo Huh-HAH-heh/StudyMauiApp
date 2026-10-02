@@ -1,0 +1,32 @@
+## Target directories
+Bin/
+obj/
+
+## Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+
+## macOS / iOS / Android specifics
+.DS_Store
+.directory
+*.ap_
+*.apk
+*.aab
+AppBundle/
+ipabundle/
+
+## User-specific files (monodesvelop / Visual Studio Mac / Rider)
+*.userprefs
+*.pidb
+*.suo
+*.userfiles
+
+## Visual Studio Code
+.vscode/
+
+## .NET Core / MAUI Hot Reload and build artifacts
+.maui-hot-reload/
+Generated Files/
+_MacIconCache/
