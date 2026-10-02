@@ -15,5 +15,8 @@
         Title="Приют"
         ContentTemplate="{DataTemplate local:ShelterMainPage}"
         Route="ShelterMainPage" />
-
+    <ShellContent
+    Title="Авторизация"
+    ContentTemplate="{DataTemplate local:LoginPage}"
+    Route="LoginPage" />
 </Shell>

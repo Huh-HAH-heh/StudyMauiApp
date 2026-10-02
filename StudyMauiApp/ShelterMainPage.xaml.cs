@@ -21,6 +21,11 @@ public enum UserRole
         Volonteer,
         Veterenar
     }
+    private async void OnLoginClicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("LoginPage");
+
+    }
     public static class UserStore
     {
         public static List<User> Users { get; } = [

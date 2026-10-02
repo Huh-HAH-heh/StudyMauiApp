@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="StudyMauiApp.LoginPage"
+    Shell.NavBarIsVisible="False"
+    Title="Login"
+    BackgroundColor="{StaticResource DashboardBackground}">
+    <Grid
+            
+        
+        Padding="30"
+        RowDefinitions="*,auto,*"
+        
+        >
+        <Border
+            
+            Grid.Row="1"
+            Padding="28"
+            BackgroundColor="Wheat"
+            Stroke="Aqua"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 16"
+            
+            >
+
+            <VerticalStackLayout Spacing="16">
+                <Label
+                    Text="Приют ля животных "
+                    FontSize="26"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    />
+                <Label
+    Text="Login"
+    FontSize="26"
+    FontAttributes="Bold"
+    HorizontalTextAlignment="Center"
+    />
+                <Entry
+                    
+   x:Name="LoginEntry"
+    FontSize="26"
+    FontAttributes="Bold"
+    HorizontalTextAlignment="Center"
+     ClearButtonVisibility="WhileEditing"/>
+                <Entry
+    x:Name="Pass"
+                    IsPassword="True"
+    FontSize="26"
+    FontAttributes="Bold"
+    HorizontalTextAlignment="Center"
+    ClearButtonVisibility="WhileEditing"
+                    
+                    />
+                <Button
+                        Text="Enter"
+    FontSize="26"
+    FontAttributes="Bold" TextColor="White"
+                    CornerRadius="10"
+                    Clicked="onLoginClicked"
+                    />
+                
+
+
+            </VerticalStackLayout>
+            
+        </Border>
+    </Grid>
+
+   
+</ContentPage>
