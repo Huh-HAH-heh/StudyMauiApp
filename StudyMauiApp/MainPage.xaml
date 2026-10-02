@@ -21,9 +21,14 @@
             <VerticalStackLayout Grid.Column="0" Spacing="16">
 
                 <!-- Video -->
-                <Border Style="{StaticResource CardStyle}" HeightRequest="150">
-                    <Grid RowDefinitions="1*,26">
-                        <Grid BackgroundColor="{StaticResource DashboardCyan}">
+                <Border Style="{StaticResource CardStyle}" >
+                    <Grid RowDefinitions="*, Auto">
+                        <Grid Grid.Row="0" 
+                            BackgroundColor="{StaticResource DashboardCyan}"
+                          Padding="0,45"
+                              HorizontalOptions="Fill"
+                              VerticalOptions="Fill"
+                              >
                             <Border
                                 WidthRequest="34"
                                 HeightRequest="34"
@@ -43,11 +48,16 @@
                             </Border>
                         </Grid>
 
-                        <Grid Grid.Row="1" Style="{StaticResource DarkBarStyle}" ColumnDefinitions="22,1*,22">
+                        <Grid 
+                            Grid.Row="1" 
+                            Style="{StaticResource DarkBarStyle}" 
+                            ColumnDefinitions="22,*,22"
+                            Padding="10,8"
+                            >
                             <Label Text="◖" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                             <ProgressBar
                                 Grid.Column="1"
-                                Progress="0.62"
+                                Progress="0.82"
                                 HeightRequest="3"
                                 VerticalOptions="Center"
                                 ProgressColor="{StaticResource DashboardCyan}"
