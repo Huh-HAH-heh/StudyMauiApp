@@ -6,354 +6,343 @@
     Shell.NavBarIsVisible="False"
     BackgroundColor="{StaticResource DashboardBackground}">
 
-    <Grid>
-        <ScrollView
-            HorizontalScrollBarVisibility="Never"
-            VerticalScrollBarVisibility="Default">
+    <ScrollView
+        HorizontalScrollBarVisibility="Never"
+        VerticalScrollBarVisibility="Default">
 
-            <Grid
-                Padding="18"
-                ColumnSpacing="18"
-                RowSpacing="0"
-                ColumnDefinitions="1*,1*,1*"
-                MinimumWidthRequest="680">
+        <Grid
+            Padding="18"
+            ColumnSpacing="18"
+            RowSpacing="0"
+            ColumnDefinitions="1*,1*,1*"
+            MinimumWidthRequest="680">
 
-                <!-- LEFT -->
-                <VerticalStackLayout Grid.Column="0" Spacing="16">
+            <!-- LEFT -->
+            <VerticalStackLayout Grid.Column="0" Spacing="16">
 
-                    <!-- Video -->
-                    <Border Style="{StaticResource CardStyle}" >
-                        <Grid RowDefinitions="*, Auto">
-                            <Grid Grid.Row="0" 
-                                BackgroundColor="{StaticResource DashboardCyan}"
-                                Padding="0,45"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="Fill">
-                                <Border
-                                    WidthRequest="34"
-                                    HeightRequest="34"
-                                    Stroke="White"
-                                    StrokeThickness="2"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    BackgroundColor="Transparent"
-                                    StrokeShape="RoundRectangle 20">
-                                    <Label
-                                        Text="▶"
-                                        TextColor="White"
-                                        FontSize="13"
-                                        HorizontalTextAlignment="Center"
-                                        VerticalTextAlignment="Center"
-                                        Margin="2,0,0,0" />
-                                </Border>
-                            </Grid>
-
-                            <Grid 
-                                Grid.Row="1" 
-                                Style="{StaticResource DarkBarStyle}" 
-                                ColumnDefinitions="22,*,22"
-                                Padding="10,8">
-                                <Label Text="◖" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <ProgressBar
-                                    Grid.Column="1"
-                                    Progress="0.82"
-                                    HeightRequest="3"
-                                    VerticalOptions="Center"
-                                    ProgressColor="{StaticResource DashboardCyan}"
-                                    BackgroundColor="{StaticResource Gray300}" />
-                                <Label Text="◗" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                            </Grid>
+                <!-- Video -->
+                <Border Style="{StaticResource CardStyle}" >
+                    <Grid RowDefinitions="*, Auto">
+                        <Grid Grid.Row="0" 
+                            BackgroundColor="{StaticResource DashboardCyan}"
+                          Padding="0,45"
+                              HorizontalOptions="Fill"
+                              VerticalOptions="Fill"
+                              >
+                            <Border
+                                WidthRequest="34"
+                                HeightRequest="34"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                BackgroundColor="Transparent"
+                                StrokeShape="RoundRectangle 20">
+                                <Label
+                                    Text="▶"
+                                    TextColor="White"
+                                    FontSize="13"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    Margin="2,0,0,0" />
+                            </Border>
                         </Grid>
-                    </Border>
 
-                    <!-- Social / editor -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="116">
-                        <Grid ColumnDefinitions="28,1*" RowDefinitions="1*,30">
-                            <VerticalStackLayout Grid.RowSpan="2" BackgroundColor="{StaticResource White}" Spacing="0">
-                                <Label Text="f" FontAttributes="Bold" FontSize="12" TextColor="{StaticResource DashboardCyan}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
-                                <Label Text="♥" FontSize="9" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
-                                <Label Text="♧" FontSize="9" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
-                            </VerticalStackLayout>
+                        <Grid 
+                            Grid.Row="1" 
+                            Style="{StaticResource DarkBarStyle}" 
+                            ColumnDefinitions="22,*,22"
+                            Padding="10,8"
+                            >
+                            <Label Text="◖" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <ProgressBar
+                                Grid.Column="1"
+                                Progress="0.82"
+                                HeightRequest="3"
+                                VerticalOptions="Center"
+                                ProgressColor="{StaticResource DashboardCyan}"
+                                BackgroundColor="{StaticResource Gray300}" />
+                            <Label Text="◗" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
 
-                            <VerticalStackLayout Grid.Column="1" Padding="10,6,0,0" Spacing="6">
+                <!-- Social / editor -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="116">
+                    <Grid ColumnDefinitions="28,1*" RowDefinitions="1*,30">
+                        <VerticalStackLayout Grid.RowSpan="2" BackgroundColor="{StaticResource White}" Spacing="0">
+                            <Label Text="f" FontAttributes="Bold" FontSize="12" TextColor="{StaticResource DashboardCyan}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+                            <Label Text="♥" FontSize="9" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+                            <Label Text="♧" FontSize="9" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Padding="10,6,0,0" Spacing="6">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="✎" TextColor="{StaticResource DashboardMuted}" />
+                                <Label Text="Edit post" Style="{StaticResource MutedStyle}" VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                            <Border BackgroundColor="{StaticResource DashboardCyan}" StrokeThickness="0" Padding="8,5">
                                 <HorizontalStackLayout Spacing="8">
-                                    <Label Text="✎" TextColor="{StaticResource DashboardMuted}" />
-                                    <Label Text="Edit post" Style="{StaticResource MutedStyle}" VerticalTextAlignment="Center" />
+                                    <Label Text="×" TextColor="White" />
+                                    <Label Text="Remove post" FontSize="8" TextColor="White" VerticalTextAlignment="Center" />
                                 </HorizontalStackLayout>
-                                <Border BackgroundColor="{StaticResource DashboardCyan}" StrokeThickness="0" Padding="8,5">
-                                    <HorizontalStackLayout Spacing="8">
-                                        <Label Text="×" TextColor="White" />
-                                        <Label Text="Remove post" FontSize="8" TextColor="White" VerticalTextAlignment="Center" />
-                                    </HorizontalStackLayout>
-                                </Border>
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label Text="⌁" TextColor="{StaticResource DashboardMuted}" />
-                                    <Label Text="Save post" Style="{StaticResource MutedStyle}" VerticalTextAlignment="Center" />
-                                </HorizontalStackLayout>
+                            </Border>
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="⌁" TextColor="{StaticResource DashboardMuted}" />
+                                <Label Text="Save post" Style="{StaticResource MutedStyle}" VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Column="1" Grid.Row="1" Style="{StaticResource DarkBarStyle}" />
+                    </Grid>
+                </Border>
+
+                <!-- Weather -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="188">
+                    <Grid RowDefinitions="104,1*">
+                        <Grid BackgroundColor="{StaticResource DashboardCyan}">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="0">
+                                <Label Text="☁" TextColor="White" FontSize="34" HorizontalTextAlignment="Center" />
+                                <Label Text="13°C Marseille" TextColor="White" FontSize="9" HorizontalTextAlignment="Center" />
                             </VerticalStackLayout>
-
-                            <Grid Grid.Column="1" Grid.Row="1" Style="{StaticResource DarkBarStyle}" />
                         </Grid>
-                    </Border>
-
-                    <!-- Weather -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="188">
-                        <Grid RowDefinitions="104,1*">
-                            <Grid BackgroundColor="{StaticResource DashboardCyan}">
-                                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="0">
-                                    <Label Text="☁" TextColor="White" FontSize="34" HorizontalTextAlignment="Center" />
-                                    <Label Text="13°C Marseille" TextColor="White" FontSize="9" HorizontalTextAlignment="Center" />
-                                </VerticalStackLayout>
-                            </Grid>
-                            <Grid Grid.Row="1" Padding="8,8,8,0" ColumnDefinitions="1*,1*,1*,1*">
-                                <VerticalStackLayout Spacing="7">
-                                    <Label Text="MON" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                    <Label Text="☀" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
-                                    <Label Text="13°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Grid.Column="1" Spacing="7">
-                                    <Label Text="TUE" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                    <Label Text="☼" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
-                                    <Label Text="10°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Grid.Column="2" Spacing="7">
-                                    <Label Text="WED" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                    <Label Text="☼" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
-                                    <Label Text="17°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Grid.Column="3" Spacing="7">
-                                    <Label Text="MON" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                    <Label Text="☁" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
-                                    <Label Text="22°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </VerticalStackLayout>
-
-                <!-- CENTER -->
-                <VerticalStackLayout Grid.Column="1" Spacing="16">
-
-                    <!-- Profile -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="116">
-                        <Grid RowDefinitions="1*,26">
-                            <Grid Padding="10" ColumnDefinitions="48,1*,24">
-                                <Border
-                                    WidthRequest="40"
-                                    HeightRequest="40"
-                                    StrokeThickness="0"
-                                    BackgroundColor="{StaticResource DashboardDark}"
-                                    StrokeShape="RoundRectangle 24"
-                                    VerticalOptions="Center">
-                                    <Label Text="A" TextColor="White" FontSize="17" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                </Border>
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                    <Label Text="Anne Thai" Style="{StaticResource CardTitleStyle}" />
-                                    <Label Text="Product Designer" Style="{StaticResource MutedStyle}" />
-                                    <Label Text="http://annehthe.com/" Style="{StaticResource TinyStyle}" />
-                                </VerticalStackLayout>
-                                <Border Grid.Column="2" WidthRequest="12" HeightRequest="12" StrokeThickness="0" BackgroundColor="#F44B73" StrokeShape="RoundRectangle 8" VerticalOptions="Start">
-                                    <Label Text="•" TextColor="White" FontSize="8" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                </Border>
-                            </Grid>
-                            <Grid Grid.Row="1" Style="{StaticResource DarkBarStyle}" ColumnDefinitions="1*,1*,1*">
-                                <Grid BackgroundColor="{StaticResource DashboardCyan}">
-                                    <Label Text="◷" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                </Grid>
-                                <Label Grid.Column="1" Text="♡" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="2" Text="♫" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                            </Grid>
-                        </Grid>
-                    </Border>
-
-                    <!-- Login -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="157">
-                        <Grid RowDefinitions="1*,27" Padding="12,10,12,0">
+                        <Grid Grid.Row="1" Padding="8,8,8,0" ColumnDefinitions="1*,1*,1*,1*">
                             <VerticalStackLayout Spacing="7">
-                                <Grid ColumnDefinitions="20,1*">
-                                    <Label Text="♙" TextColor="{StaticResource Gray300}" VerticalTextAlignment="Center" />
-                                    <Entry Grid.Column="1" Placeholder=" " />
-                                </Grid>
-                                <Grid ColumnDefinitions="20,1*">
-                                    <Label Text="▢" TextColor="{StaticResource Gray300}" VerticalTextAlignment="Center" />
-                                    <Entry Grid.Column="1" Placeholder="Password" IsPassword="True" />
-                                </Grid>
-                                <Button Text="SUBMIT" HeightRequest="27" Padding="0" />
-                                <Label Text="Forgot your password?" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                                <Label Text="MON" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                                <Label Text="☀" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
+                                <Label Text="13°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
                             </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="7">
+                                <Label Text="TUE" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                                <Label Text="☼" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
+                                <Label Text="10°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Spacing="7">
+                                <Label Text="WED" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                                <Label Text="☼" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
+                                <Label Text="17°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="3" Spacing="7">
+                                <Label Text="MON" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                                <Label Text="☁" FontSize="14" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" />
+                                <Label Text="22°C" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
 
-                            <Grid Grid.Row="1" Margin="-12,0,-12,0" Style="{StaticResource DarkBarStyle}">
-                                <Label Text="✦  Log in with Google+" TextColor="White" FontSize="8" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+            <!-- CENTER -->
+            <VerticalStackLayout Grid.Column="1" Spacing="16">
+
+                <!-- Profile -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="116">
+                    <Grid RowDefinitions="1*,26">
+                        <Grid Padding="10" ColumnDefinitions="48,1*,24">
+                            <Border
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                StrokeThickness="0"
+                                BackgroundColor="{StaticResource DashboardDark}"
+                                StrokeShape="RoundRectangle 24"
+                                VerticalOptions="Center">
+                                <Label Text="A" TextColor="White" FontSize="17" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="Anne Thai" Style="{StaticResource CardTitleStyle}" />
+                                <Label Text="Product Designer" Style="{StaticResource MutedStyle}" />
+                                <Label Text="http://annehthe.com/" Style="{StaticResource TinyStyle}" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="2" WidthRequest="12" HeightRequest="12" StrokeThickness="0" BackgroundColor="#F44B73" StrokeShape="RoundRectangle 8" VerticalOptions="Start">
+                                <Label Text="•" TextColor="White" FontSize="8" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="1" Style="{StaticResource DarkBarStyle}" ColumnDefinitions="1*,1*,1*">
+                            <Grid BackgroundColor="{StaticResource DashboardCyan}">
+                                <Label Text="◷" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Grid>
+                            <Label Grid.Column="1" Text="♡" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="2" Text="♫" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- Login -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="157">
+                    <Grid RowDefinitions="1*,27" Padding="12,10,12,0">
+                        <VerticalStackLayout Spacing="7">
+                            <Grid ColumnDefinitions="20,1*">
+                                <Label Text="♙" TextColor="{StaticResource Gray300}" VerticalTextAlignment="Center" />
+                                <Entry Grid.Column="1" Placeholder=" " />
+                            </Grid>
+                            <Grid ColumnDefinitions="20,1*">
+                                <Label Text="▢" TextColor="{StaticResource Gray300}" VerticalTextAlignment="Center" />
+                                <Entry Grid.Column="1" Placeholder="Password" IsPassword="True" />
+                            </Grid>
+                            <Button Text="SUBMIT" HeightRequest="27" Padding="0" />
+                            <Label Text="Forgot your password?" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Row="1" Margin="-12,0,-12,0" Style="{StaticResource DarkBarStyle}">
+                            <Label Text="✦  Log in with Google+" TextColor="White" FontSize="8" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- Map -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="170">
+                    <Grid RowDefinitions="1*,27">
+                        <Grid BackgroundColor="{StaticResource DashboardMap}">
+                            <Grid ColumnDefinitions="20,20,1*" RowDefinitions="20,20,1*" Padding="7">
+                                <Border WidthRequest="13" HeightRequest="13" StrokeThickness="0" BackgroundColor="{StaticResource DashboardCyan}" />
+                                <Border Grid.Row="1" WidthRequest="13" HeightRequest="13" StrokeThickness="0" BackgroundColor="White" />
+                            </Grid>
+
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="210" HeightRequest="92">
+                                <Border WidthRequest="38" HeightRequest="26" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="-12" Margin="-55,-18,0,0" />
+                                <Border WidthRequest="44" HeightRequest="32" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="21" Margin="10,-24,0,0" />
+                                <Border WidthRequest="50" HeightRequest="42" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="-8" Margin="56,20,0,0" />
+                                <Border WidthRequest="44" HeightRequest="30" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="12" Margin="-8,24,0,0" />
+                                <Border WidthRequest="34" HeightRequest="24" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="-17" Margin="85,-18,0,0" />
                             </Grid>
                         </Grid>
-                    </Border>
+                        <Grid Grid.Row="1" Style="{StaticResource DarkBarStyle}" ColumnDefinitions="1*,28">
+                            <Label Text="Lyon, France" TextColor="White" FontSize="8" VerticalTextAlignment="Center" Margin="10,0" />
+                            <Label Grid.Column="1" Text="⌖" TextColor="White" FontSize="10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
 
-                    <!-- Map -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="170">
-                        <Grid RowDefinitions="1*,27">
-                            <Grid BackgroundColor="{StaticResource DashboardMap}">
-                                <Grid ColumnDefinitions="20,20,1*" RowDefinitions="20,20,1*" Padding="7">
-                                    <Border WidthRequest="13" HeightRequest="13" StrokeThickness="0" BackgroundColor="{StaticResource DashboardCyan}" />
-                                    <Border Grid.Row="1" WidthRequest="13" HeightRequest="13" StrokeThickness="0" BackgroundColor="White" />
-                                </Grid>
+            <!-- RIGHT -->
+            <VerticalStackLayout Grid.Column="2" Spacing="16">
 
-                                <Grid HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="210" HeightRequest="92">
-                                    <Border WidthRequest="38" HeightRequest="26" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="-12" Margin="-55,-18,0,0" />
-                                    <Border WidthRequest="44" HeightRequest="32" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="21" Margin="10,-24,0,0" />
-                                    <Border WidthRequest="50" HeightRequest="42" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="-8" Margin="56,20,0,0" />
-                                    <Border WidthRequest="44" HeightRequest="30" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="12" Margin="-8,24,0,0" />
-                                    <Border WidthRequest="34" HeightRequest="24" StrokeThickness="0" BackgroundColor="{StaticResource DashboardMapLight}" Rotation="-17" Margin="85,-18,0,0" />
-                                </Grid>
-                            </Grid>
-                            <Grid Grid.Row="1" Style="{StaticResource DarkBarStyle}" ColumnDefinitions="1*,28">
-                                <Label Text="Lyon, France" TextColor="White" FontSize="8" VerticalTextAlignment="Center" Margin="10,0" />
-                                <Label Grid.Column="1" Text="⌖" TextColor="White" FontSize="10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <!-- Stats -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="150">
+                    <Grid Padding="10" RowDefinitions="1*,1*,1*" RowSpacing="0">
+                        <Grid ColumnDefinitions="55,1*">
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Label Text="21,770" Style="{StaticResource CardTitleStyle}" />
+                                <Label Text="Total visitors" Style="{StaticResource TinyStyle}" />
+                            </VerticalStackLayout>
+                            <Grid Grid.Column="1" HeightRequest="45" VerticalOptions="Center">
+                                <BoxView WidthRequest="18" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="End" Color="{StaticResource DashboardMap}" />
+                                <BoxView WidthRequest="18" HeightRequest="38" HorizontalOptions="Start" VerticalOptions="End" Margin="12,0,0,0" Color="{StaticResource DashboardMap}" />
+                                <BoxView WidthRequest="18" HeightRequest="26" HorizontalOptions="Start" VerticalOptions="End" Margin="24,0,0,0" Color="{StaticResource DashboardMap}" />
+                                <BoxView WidthRequest="18" HeightRequest="18" HorizontalOptions="Start" VerticalOptions="End" Margin="36,0,0,0" Color="{StaticResource DashboardCyan}" />
                             </Grid>
                         </Grid>
-                    </Border>
-                </VerticalStackLayout>
-
-                <!-- RIGHT -->
-                <VerticalStackLayout Grid.Column="2" Spacing="16">
-
-                    <!-- Stats -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="150">
-                        <Grid Padding="10" RowDefinitions="1*,1*,1*" RowSpacing="0">
-                            <Grid ColumnDefinitions="55,1*">
-                                <VerticalStackLayout VerticalOptions="Center">
-                                    <Label Text="21,770" Style="{StaticResource CardTitleStyle}" />
-                                    <Label Text="Total visitors" Style="{StaticResource TinyStyle}" />
-                                </VerticalStackLayout>
-                                <Grid Grid.Column="1" HeightRequest="45" VerticalOptions="Center">
-                                    <BoxView WidthRequest="18" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="End" Color="{StaticResource DashboardMap}" />
-                                    <BoxView WidthRequest="18" HeightRequest="38" HorizontalOptions="Start" VerticalOptions="End" Margin="12,0,0,0" Color="{StaticResource DashboardMap}" />
-                                    <BoxView WidthRequest="18" HeightRequest="26" HorizontalOptions="Start" VerticalOptions="End" Margin="24,0,0,0" Color="{StaticResource DashboardMap}" />
-                                    <BoxView WidthRequest="18" HeightRequest="18" HorizontalOptions="Start" VerticalOptions="End" Margin="36,0,0,0" Color="{StaticResource DashboardCyan}" />
-                                </Grid>
-                            </Grid>
-                            <Grid Grid.Row="1" ColumnDefinitions="55,1*">
-                                <VerticalStackLayout VerticalOptions="Center">
-                                    <Label Text="93,205" Style="{StaticResource CardTitleStyle}" />
-                                    <Label Text="Page views" Style="{StaticResource TinyStyle}" />
-                                </VerticalStackLayout>
-                                <Grid Grid.Column="1" HeightRequest="45" VerticalOptions="Center">
-                                    <BoxView WidthRequest="3" HeightRequest="12" HorizontalOptions="Start" VerticalOptions="End" Margin="4,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="-25" />
-                                    <BoxView WidthRequest="3" HeightRequest="25" HorizontalOptions="Start" VerticalOptions="End" Margin="13,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="26" />
-                                    <BoxView WidthRequest="3" HeightRequest="34" HorizontalOptions="Start" VerticalOptions="End" Margin="22,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="-15" />
-                                    <BoxView WidthRequest="3" HeightRequest="22" HorizontalOptions="Start" VerticalOptions="End" Margin="31,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="35" />
-                                    <BoxView WidthRequest="3" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="End" Margin="40,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="-28" />
-                                </Grid>
-                            </Grid>
-                            <Grid Grid.Row="2" ColumnDefinitions="55,1*">
-                                <VerticalStackLayout VerticalOptions="Center">
-                                    <Label Text="5,442" Style="{StaticResource CardTitleStyle}" />
-                                    <Label Text="Mobile visitors" Style="{StaticResource TinyStyle}" />
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
-                                    <HorizontalStackLayout Spacing="7">
-                                        <Border WidthRequest="18" HeightRequest="18" Stroke="{StaticResource DashboardLine}" BackgroundColor="White" StrokeShape="RoundRectangle 12">
-                                            <Label Text="75%" FontSize="5" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                        </Border>
-                                        <Label Text="Apple iPhone" Style="{StaticResource TinyStyle}" VerticalTextAlignment="Center" />
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="7">
-                                        <Border WidthRequest="18" HeightRequest="18" Stroke="{StaticResource DashboardLine}" BackgroundColor="White" StrokeShape="RoundRectangle 12">
-                                            <Label Text="25%" FontSize="5" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                        </Border>
-                                        <Label Text="Google Android" Style="{StaticResource TinyStyle}" VerticalTextAlignment="Center" />
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
+                        <Grid Grid.Row="1" ColumnDefinitions="55,1*">
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Label Text="93,205" Style="{StaticResource CardTitleStyle}" />
+                                <Label Text="Page views" Style="{StaticResource TinyStyle}" />
+                            </VerticalStackLayout>
+                            <Grid Grid.Column="1" HeightRequest="45" VerticalOptions="Center">
+                                <BoxView WidthRequest="3" HeightRequest="12" HorizontalOptions="Start" VerticalOptions="End" Margin="4,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="-25" />
+                                <BoxView WidthRequest="3" HeightRequest="25" HorizontalOptions="Start" VerticalOptions="End" Margin="13,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="26" />
+                                <BoxView WidthRequest="3" HeightRequest="34" HorizontalOptions="Start" VerticalOptions="End" Margin="22,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="-15" />
+                                <BoxView WidthRequest="3" HeightRequest="22" HorizontalOptions="Start" VerticalOptions="End" Margin="31,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="35" />
+                                <BoxView WidthRequest="3" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="End" Margin="40,0,0,0" Color="{StaticResource DashboardCyan}" Rotation="-28" />
                             </Grid>
                         </Grid>
-                    </Border>
-
-                    <!-- Calendar -->
-                    <Border Style="{StaticResource CardStyle}" HeightRequest="225">
-                        <Grid RowDefinitions="34,24,1*">
-                            <Grid BackgroundColor="{StaticResource DashboardDark}" ColumnDefinitions="28,1*,28">
-                                <Label Text="‹" TextColor="White" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="1" Text="November" TextColor="White" FontSize="11" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="2" Text="›" TextColor="White" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                            </Grid>
-
-                            <Grid Grid.Row="1" BackgroundColor="{StaticResource DashboardCyan}" Padding="4,0" ColumnDefinitions="1*,1*,1*,1*,1*,1*,1*">
-                                <Label Text="Mon" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="1" Text="Tue" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="2" Text="Wed" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="3" Text="Thu" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="4" Text="Fri" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="5" Text="Sat" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="6" Text="Sun" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                            </Grid>
-
-                            <Grid Grid.Row="2" Padding="5" RowSpacing="0" ColumnSpacing="0"
-                                  RowDefinitions="1*,1*,1*,1*,1*,1*"
-                                  ColumnDefinitions="1*,1*,1*,1*,1*,1*,1*">
-                                <Label Text="27" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="1" Text="28" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="2" Text="29" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="3" Text="30" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="4" Text="31" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="5" Text="01" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Column="6" Text="02" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-                                <Label Grid.Row="1" Text="03" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="1" Grid.Column="1" Text="04" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="1" Grid.Column="2" Text="05" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="1" Grid.Column="3" Text="06" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="1" Grid.Column="4" Text="07" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="1" Grid.Column="5" Text="08" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="1" Grid.Column="6" Text="09" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-                                <Label Grid.Row="2" Text="10" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="2" Grid.Column="1" Text="11" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="2" Grid.Column="2" Text="12" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="2" Grid.Column="3" Text="13" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Border Grid.Row="2" Grid.Column="4" BackgroundColor="{StaticResource DashboardCard}" Stroke="{StaticResource DashboardCyan}" StrokeThickness="1" StrokeShape="RoundRectangle 1">
-                                    <Label Text="14" TextColor="{StaticResource DashboardDark}" FontSize="7" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                </Border>
-                                <Label Grid.Row="2" Grid.Column="5" Text="15" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="2" Grid.Column="6" Text="16" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-                                <Label Grid.Row="3" Text="17" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="3" Grid.Column="1" Text="18" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="3" Grid.Column="2" Text="19" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="3" Grid.Column="3" Text="20" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="3" Grid.Column="4" Text="21" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="3" Grid.Column="5" Text="22" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="3" Grid.Column="6" Text="23" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-                                <Label Grid.Row="4" Text="24" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="4" Grid.Column="1" Text="25" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="4" Grid.Column="2" Text="26" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="4" Grid.Column="3" Text="27" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="4" Grid.Column="4" Text="28" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="4" Grid.Column="5" Text="29" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="4" Grid.Column="6" Text="30" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-
-                                <Label Grid.Row="5" Text="01" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="5" Grid.Column="1" Text="02" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="5" Grid.Column="2" Text="03" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="5" Grid.Column="3" Text="04" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="5" Grid.Column="4" Text="05" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="5" Grid.Column="5" Text="06" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                                <Label Grid.Row="5" Grid.Column="6" Text="07" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                            </Grid>
+                        <Grid Grid.Row="2" ColumnDefinitions="55,1*">
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Label Text="5,442" Style="{StaticResource CardTitleStyle}" />
+                                <Label Text="Mobile visitors" Style="{StaticResource TinyStyle}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="7">
+                                    <Border WidthRequest="18" HeightRequest="18" Stroke="{StaticResource DashboardLine}" BackgroundColor="White" StrokeShape="RoundRectangle 12">
+                                        <Label Text="75%" FontSize="5" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                    </Border>
+                                    <Label Text="Apple iPhone" Style="{StaticResource TinyStyle}" VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="7">
+                                    <Border WidthRequest="18" HeightRequest="18" Stroke="{StaticResource DashboardLine}" BackgroundColor="White" StrokeShape="RoundRectangle 12">
+                                        <Label Text="25%" FontSize="5" TextColor="{StaticResource DashboardDark}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                    </Border>
+                                    <Label Text="Google Android" Style="{StaticResource TinyStyle}" VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
                         </Grid>
-                    </Border>
-                </VerticalStackLayout>
-            </Grid>
-        </ScrollView>
+                    </Grid>
+                </Border>
 
-        <Button
-            Text="Login"
-            Clicked="OnLoginClicked"
-            HorizontalOptions="End"
-            VerticalOptions="Start"
-            Margin="18"
-            BackgroundColor="#2F80ED"
-            TextColor="White"
-            CornerRadius="8"
-            Padding="18,8" />
-    </Grid>
+                <!-- Calendar -->
+                <Border Style="{StaticResource CardStyle}" HeightRequest="225">
+                    <Grid RowDefinitions="34,24,1*">
+                        <Grid BackgroundColor="{StaticResource DashboardDark}" ColumnDefinitions="28,1*,28">
+                            <Label Text="‹" TextColor="White" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="November" TextColor="White" FontSize="11" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="2" Text="›" TextColor="White" FontSize="18" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" BackgroundColor="{StaticResource DashboardCyan}" Padding="4,0" ColumnDefinitions="1*,1*,1*,1*,1*,1*,1*">
+                            <Label Text="Mon" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="Tue" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="2" Text="Wed" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="3" Text="Thu" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="4" Text="Fri" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="5" Text="Sat" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="6" Text="Sun" TextColor="White" FontSize="6" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+
+                        <Grid Grid.Row="2" Padding="5" RowSpacing="0" ColumnSpacing="0"
+                              RowDefinitions="1*,1*,1*,1*,1*,1*"
+                              ColumnDefinitions="1*,1*,1*,1*,1*,1*,1*">
+                            <Label Text="27" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="28" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="2" Text="29" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="3" Text="30" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="4" Text="31" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="5" Text="01" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="6" Text="02" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                            <Label Grid.Row="1" Text="03" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="04" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="2" Text="05" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="3" Text="06" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="4" Text="07" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="5" Text="08" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="1" Grid.Column="6" Text="09" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                            <Label Grid.Row="2" Text="10" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="2" Grid.Column="1" Text="11" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="2" Grid.Column="2" Text="12" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="2" Grid.Column="3" Text="13" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Border Grid.Row="2" Grid.Column="4" BackgroundColor="{StaticResource DashboardCard}" Stroke="{StaticResource DashboardCyan}" StrokeThickness="1" StrokeShape="RoundRectangle 1">
+                                <Label Text="14" TextColor="{StaticResource DashboardDark}" FontSize="7" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <Label Grid.Row="2" Grid.Column="5" Text="15" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="2" Grid.Column="6" Text="16" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                            <Label Grid.Row="3" Text="17" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="3" Grid.Column="1" Text="18" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="3" Grid.Column="2" Text="19" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="3" Grid.Column="3" Text="20" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="3" Grid.Column="4" Text="21" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="3" Grid.Column="5" Text="22" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="3" Grid.Column="6" Text="23" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                            <Label Grid.Row="4" Text="24" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="4" Grid.Column="1" Text="25" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="4" Grid.Column="2" Text="26" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="4" Grid.Column="3" Text="27" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="4" Grid.Column="4" Text="28" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="4" Grid.Column="5" Text="29" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="4" Grid.Column="6" Text="30" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                            <Label Grid.Row="5" Text="01" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="5" Grid.Column="1" Text="02" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="5" Grid.Column="2" Text="03" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="5" Grid.Column="3" Text="04" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="5" Grid.Column="4" Text="05" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="5" Grid.Column="5" Text="06" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="5" Grid.Column="6" Text="07" Style="{StaticResource TinyStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>
