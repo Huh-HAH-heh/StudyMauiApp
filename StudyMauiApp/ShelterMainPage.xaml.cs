@@ -76,6 +76,7 @@ public enum UserRole
     public ShelterMainPage()
     {
         InitializeComponent();
+        LoginButton.Clicked += OnLoginClicked;
 
         SpeciesPicker.SelectedIndex = 0;
         GenderPicker.SelectedIndex = 0;
