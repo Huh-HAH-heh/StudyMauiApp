@@ -54,6 +54,12 @@
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                    <Button Text="Login"
+                            Clicked="OnLoginClicked"
+                            BackgroundColor="#2F80ED"
+                            TextColor="White"
+                            CornerRadius="8"
+                            Padding="14,7" />
                     <Button Text="Главная"
                             Clicked="OnHomeClicked"
                             BackgroundColor="#2F80ED"
