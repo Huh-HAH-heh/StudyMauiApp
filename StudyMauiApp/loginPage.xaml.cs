@@ -31,10 +31,11 @@ public partial class LoginPage : ContentPage
             await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
             return;
         }
-        if (!(user == null)){
+    
 
             ShelterMainPage.SessionObject.CurrentUser = user;
-        }
+            await Shell.Current.GoToAsync("..");
+        
 
     } 
 }
