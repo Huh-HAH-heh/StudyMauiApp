@@ -4,6 +4,58 @@ namespace StudyMauiApp;
 
 public partial class ShelterMainPage : ContentPage
 {
+    bool isAdmin;
+    public class User
+    {
+        public string FullName { get; set; } = "";
+        public string Phone { get; set; } = "";
+        public string Login { get; set; } = "";
+        public string Password { get; set; } = "";
+        public UserRole Role { get; set; }
+    }
+public enum UserRole
+    {
+        Anonim ,
+        Client,
+        Admin,
+        Volonteer,
+        Veterenar
+    }
+    public static class UserStore
+    {
+        public static List<User> Users { get; } = [
+            new User{
+                   FullName = "Nerd",
+            Phone = "+7 666 666-66-66",
+            Login = "Nerd",
+            Password = "Nerd",
+            Role = UserRole.Admin
+            },
+                new User{
+                   FullName = "GOON",
+            Phone = "+7 900 000-00-00",
+            Login = "GOON",
+            Password = "GOON",
+            Role = UserRole.Client
+            },         new User{
+                   FullName = "WERDO",
+            Phone = "+7 900 000-00-00",
+            Login = "WERDO",
+            Password = "WERDO",
+            Role = UserRole.Volonteer
+            }
+            ];
+    }
+    public static class SessionObject
+    {
+        public static User? CurrentUser { get; set; }
+
+        public static bool IsAdmin => CurrentUser?.Role == UserRole.Admin;
+        public static bool IsVolonteer => CurrentUser?.Role == UserRole.Volonteer;
+        public static bool IsClient => CurrentUser?.Role == UserRole.Client;
+        //public static bool IsAdmin => CurrentUser?.Role == UserRole.Admin;
+        
+    }
     private readonly List<AnimalItem> _animals =
     [
         new("Белка", "A-104", "Собака • Лабрадор • Самка • 3 года", "В приюте", "24 кг"),
