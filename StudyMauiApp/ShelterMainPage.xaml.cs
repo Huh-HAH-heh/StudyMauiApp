@@ -1,3 +1,5 @@
+
+using Microsoft.Extensions.Logging.Abstractions;
 using System.Collections.ObjectModel;
 
 namespace StudyMauiApp;
@@ -21,6 +23,7 @@ public enum UserRole
         Volonteer,
         Veterenar
     }
+ 
     private async void OnLoginClicked(object? sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("LoginPage");
@@ -53,7 +56,23 @@ public enum UserRole
     }
     public static class SessionObject
     {
-        public static User? CurrentUser { get; set; }
+        private static User? _currentUser;
+
+        public static User? CurrentUser
+        {
+            get
+            {
+                return _currentUser;
+            }
+            set
+            {
+                _currentUser = value;
+
+                Console.WriteLine(
+                    $"CurrentUser изменён: {value?.Login}");
+            }
+
+        }
 
         public static bool IsAdmin => CurrentUser?.Role == UserRole.Admin;
         public static bool IsVolonteer => CurrentUser?.Role == UserRole.Volonteer;

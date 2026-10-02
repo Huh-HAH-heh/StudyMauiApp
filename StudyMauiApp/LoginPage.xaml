@@ -40,15 +40,14 @@
                 <Entry
                     
    x:Name="LoginEntry"
-    FontSize="26"
-    FontAttributes="Bold"
+ 
     HorizontalTextAlignment="Center"
      ClearButtonVisibility="WhileEditing"/>
                 <Entry
     x:Name="Pass"
                     IsPassword="True"
-    FontSize="26"
-    FontAttributes="Bold"
+  
+
     HorizontalTextAlignment="Center"
     ClearButtonVisibility="WhileEditing"
                     
