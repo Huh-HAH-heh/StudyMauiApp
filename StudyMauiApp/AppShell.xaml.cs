@@ -1,13 +1,9 @@
-﻿
+namespace StudyMauiApp;
 
-namespace StudyMauiApp
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-            Routing.RegisterRoute("LoginPage", typeof(LoginPage));
-        }
+        InitializeComponent();
     }
 }
