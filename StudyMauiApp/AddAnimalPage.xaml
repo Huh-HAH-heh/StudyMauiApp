@@ -7,35 +7,62 @@
     BackgroundColor="#F4F6F8">
 
     <ScrollView>
-        <VerticalStackLayout Padding="24" Spacing="14">
+        <VerticalStackLayout Padding="24" Spacing="16">
 
             <Border
                 BackgroundColor="White"
                 Stroke="#E0E5EA"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 12"
-                Padding="20">
+                Padding="22">
 
-                <VerticalStackLayout Spacing="12">
+                <VerticalStackLayout Spacing="18">
 
-                    <Label Text="Регистрация животного"
-                           FontSize="24"
-                           FontAttributes="Bold" />
+                    <VerticalStackLayout Spacing="3">
+                        <Label Text="Регистрация животного"
+                               FontSize="24"
+                               FontAttributes="Bold" />
 
-                    <Label Text="Поля из журнала учета приюта"
-                           TextColor="#69747F"
-                           FontSize="12" />
+                        <Label Text="Данные для журнала учета приюта"
+                               TextColor="#69747F"
+                               FontSize="12" />
+                    </VerticalStackLayout>
 
-                    <Entry x:Name="NameEntry"
-                           Placeholder="Кличка *" />
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                        ColumnSpacing="18"
+                        RowSpacing="14">
 
-                    <Entry x:Name="NumberEntry"
-                           Placeholder="Идентификационный номер *" />
+                        <!-- Кличка -->
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
+                            <Label Text="Кличка *"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Entry x:Name="NameEntry"
+                                   Placeholder="Например: Белка"
+                                   HeightRequest="44" />
+                        </VerticalStackLayout>
 
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                        <VerticalStackLayout>
-                            <Label Text="Вид" FontSize="12" TextColor="#69747F" />
-                            <Picker x:Name="SpeciesPicker">
+                        <!-- Идентификатор -->
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                            <Label Text="Идентификационный номер *"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Entry x:Name="NumberEntry"
+                                   Placeholder="Например: A-130"
+                                   HeightRequest="44" />
+                        </VerticalStackLayout>
+
+                        <!-- Вид -->
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="5">
+                            <Label Text="Вид животного"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Picker x:Name="SpeciesPicker"
+                                    Title="Выберите вид"
+                                    HeightRequest="44"
+                                    TextColor="#20252B">
                                 <Picker.Items>
                                     <x:String>Собака</x:String>
                                     <x:String>Кошка</x:String>
@@ -44,27 +71,51 @@
                             </Picker>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Grid.Column="1">
-                            <Label Text="Пол" FontSize="12" TextColor="#69747F" />
-                            <Picker x:Name="GenderPicker">
+                        <!-- Пол -->
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5">
+                            <Label Text="Пол"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Picker x:Name="GenderPicker"
+                                    Title="Выберите пол"
+                                    HeightRequest="44"
+                                    TextColor="#20252B">
                                 <Picker.Items>
                                     <x:String>Самка</x:String>
                                     <x:String>Самец</x:String>
                                 </Picker.Items>
                             </Picker>
                         </VerticalStackLayout>
-                    </Grid>
 
-                    <Entry x:Name="BreedEntry"
-                           Placeholder="Порода *" />
+                        <!-- Порода -->
+                        <VerticalStackLayout Grid.Row="2" Grid.Column="0" Spacing="5">
+                            <Label Text="Порода"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Entry x:Name="BreedEntry"
+                                   Placeholder="Например: лабрадор"
+                                   HeightRequest="44" />
+                        </VerticalStackLayout>
 
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                        <Entry x:Name="ColorEntry"
-                               Placeholder="Окрас" />
+                        <!-- Окрас -->
+                        <VerticalStackLayout Grid.Row="2" Grid.Column="1" Spacing="5">
+                            <Label Text="Окрас"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Entry x:Name="ColorEntry"
+                                   Placeholder="Например: рыжий"
+                                   HeightRequest="44" />
+                        </VerticalStackLayout>
 
-                        <VerticalStackLayout Grid.Column="1">
-                            <Label Text="Размер" FontSize="12" TextColor="#69747F" />
-                            <Picker x:Name="SizePicker">
+                        <!-- Размер -->
+                        <VerticalStackLayout Grid.Row="3" Grid.Column="0" Spacing="5">
+                            <Label Text="Размер"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Picker x:Name="SizePicker"
+                                    Title="Выберите размер"
+                                    HeightRequest="44"
+                                    TextColor="#20252B">
                                 <Picker.Items>
                                     <x:String>Мелкий</x:String>
                                     <x:String>Средний</x:String>
@@ -72,53 +123,104 @@
                                 </Picker.Items>
                             </Picker>
                         </VerticalStackLayout>
+
+                        <!-- Возраст -->
+                        <VerticalStackLayout Grid.Row="3" Grid.Column="1" Spacing="5">
+                            <Label Text="Возраст"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Entry x:Name="AgeEntry"
+                                   Placeholder="Например: 3 года"
+                                   HeightRequest="44" />
+                        </VerticalStackLayout>
+
+                        <!-- Вес -->
+                        <VerticalStackLayout Grid.Row="4" Grid.Column="0" Spacing="5">
+                            <Label Text="Вес"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Entry x:Name="WeightEntry"
+                                   Placeholder="Например: 24 кг"
+                                   Keyboard="Numeric"
+                                   HeightRequest="44" />
+                        </VerticalStackLayout>
+
+                        <!-- Дата приемки -->
+                        <VerticalStackLayout Grid.Row="4" Grid.Column="1" Spacing="5">
+                            <Label Text="Дата приемки"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <DatePicker x:Name="AdmissionDatePicker"
+                                        HeightRequest="44"
+                                        Format="dd.MM.yyyy" />
+                        </VerticalStackLayout>
+
+                        <!-- Прививки -->
+                        <VerticalStackLayout Grid.Row="5" Grid.ColumnSpan="2" Spacing="5">
+                            <Label Text="Информация о прививках"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+                            <Editor x:Name="VaccinationsEditor"
+                                    Placeholder="Какие прививки известны..."
+                                    AutoSize="TextChanges"
+                                    MinimumHeightRequest="90" />
+                        </VerticalStackLayout>
+
+                        <!-- Фото -->
+                        <VerticalStackLayout Grid.Row="6" Grid.ColumnSpan="2" Spacing="5">
+                            <Label Text="Фотография"
+                                   FontSize="12"
+                                   TextColor="#69747F" />
+
+                            <Border
+                                BackgroundColor="#F8FAFC"
+                                Stroke="#E3E8ED"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="10">
+
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <Label x:Name="PhotoLabel"
+                                           Text="Фото не выбрано"
+                                           TextColor="#69747F"
+                                           VerticalTextAlignment="Center"
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Button Grid.Column="1"
+                                            Text="Выбрать фото"
+                                            Clicked="OnPickPhotoClicked"
+                                            BackgroundColor="#E9EEF3"
+                                            TextColor="#20252B"
+                                            CornerRadius="8" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
                     </Grid>
 
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                        <Entry x:Name="AgeEntry"
-                               Placeholder="Возраст, например 2 года" />
+                    <Label x:Name="ValidationLabel"
+                           IsVisible="False"
+                           TextColor="#D64545"
+                           FontSize="12" />
 
-                        <Entry x:Name="WeightEntry"
-                               Placeholder="Вес, например 12 кг" />
-                    </Grid>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
 
-                    <Editor x:Name="VaccinationsEditor"
-                            Placeholder="Информация о прививках"
-                            AutoSize="TextChanges"
-                            MinimumHeightRequest="80" />
+                        <Button
+                            Text="Отмена"
+                            Clicked="OnCancelClicked"
+                            BackgroundColor="#E9EEF3"
+                            TextColor="#20252B"
+                            CornerRadius="8"
+                            HeightRequest="44" />
 
-                    <Border
-                        BackgroundColor="#F8FAFC"
-                        Stroke="#E3E8ED"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="10">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                            <Label x:Name="PhotoLabel"
-                                   Text="Фото не выбрано"
-                                   TextColor="#69747F"
-                                   VerticalTextAlignment="Center" />
-                            <Button Grid.Column="1"
-                                    Text="Выбрать фото"
-                                    Clicked="OnPickPhotoClicked"
-                                    BackgroundColor="#E9EEF3"
-                                    TextColor="#20252B"
-                                    CornerRadius="8" />
-                        </Grid>
-                    </Border>
+                        <Button
+                            Grid.Column="1"
+                            Text="Зарегистрировать"
+                            Clicked="OnSaveClicked"
+                            BackgroundColor="#2F80ED"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="44" />
 
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                        <Button Text="Отмена"
-                                Clicked="OnCancelClicked"
-                                BackgroundColor="#E9EEF3"
-                                TextColor="#20252B"
-                                CornerRadius="8" />
-
-                        <Button Grid.Column="1"
-                                Text="Зарегистрировать"
-                                Clicked="OnSaveClicked"
-                                BackgroundColor="#2F80ED"
-                                TextColor="White"
-                                CornerRadius="8" />
                     </Grid>
 
                 </VerticalStackLayout>

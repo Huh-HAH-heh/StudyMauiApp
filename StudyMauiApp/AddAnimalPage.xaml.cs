@@ -11,6 +11,7 @@ public partial class AddAnimalPage : ContentPage
         SpeciesPicker.SelectedIndex = 0;
         GenderPicker.SelectedIndex = 0;
         SizePicker.SelectedIndex = 1;
+        AdmissionDatePicker.Date = DateTime.Today;
     }
 
     private async void OnPickPhotoClicked(object? sender, EventArgs e)
@@ -33,59 +34,76 @@ public partial class AddAnimalPage : ContentPage
 
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
-        if (ShelterMainPage.SessionObject.CurrentUser is not { Role: ShelterMainPage.UserRole.Admin or ShelterMainPage.UserRole.Volonteer })
+        ValidationLabel.IsVisible = false;
+
+        if (ShelterMainPage.SessionObject.CurrentUser is not
+            { Role: ShelterMainPage.UserRole.Admin or ShelterMainPage.UserRole.Volonteer })
         {
-            await DisplayAlert("Нет доступа", "Регистрировать животных могут администратор и волонтер.", "ОК");
+            await DisplayAlert(
+                "Нет доступа",
+                "Регистрировать животных могут администратор и волонтер.",
+                "ОК");
             return;
         }
 
         string name = NameEntry.Text?.Trim() ?? "";
         string number = NumberEntry.Text?.Trim() ?? "";
+        string species = SpeciesPicker.SelectedItem?.ToString() ?? "";
+        string gender = GenderPicker.SelectedItem?.ToString() ?? "";
         string breed = BreedEntry.Text?.Trim() ?? "";
-        string color = ColorEntry.Text?.Trim() ?? "Не указан";
-        string age = AgeEntry.Text?.Trim() ?? "Не указан";
-        string weight = WeightEntry.Text?.Trim() ?? "Не указан";
-        string vaccinations = VaccinationsEditor.Text?.Trim() ?? "Не указаны";
+        string color = ColorEntry.Text?.Trim() ?? "";
+        string size = SizePicker.SelectedItem?.ToString() ?? "";
+        string age = AgeEntry.Text?.Trim() ?? "";
+        string weight = WeightEntry.Text?.Trim() ?? "";
+        string vaccinations = VaccinationsEditor.Text?.Trim() ?? "";
 
-        if (string.IsNullOrWhiteSpace(name) ||
-            string.IsNullOrWhiteSpace(number) ||
-            string.IsNullOrWhiteSpace(breed))
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(number))
         {
-            await DisplayAlert("Не заполнено", "Заполните кличку, идентификационный номер и породу.", "ОК");
+            ValidationLabel.Text = "Заполните обязательные поля: кличка и идентификационный номер.";
+            ValidationLabel.IsVisible = true;
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(species) ||
+            string.IsNullOrWhiteSpace(gender) ||
+            string.IsNullOrWhiteSpace(size))
+        {
+            ValidationLabel.Text = "Выберите вид, пол и размер животного.";
+            ValidationLabel.IsVisible = true;
             return;
         }
 
         if (ShelterMainPage.AnimalStore.Animals.Any(a =>
                 a.Number.Equals(number, StringComparison.OrdinalIgnoreCase)))
         {
-            await DisplayAlert("Ошибка", "Животное с таким идентификационным номером уже есть.", "ОК");
+            ValidationLabel.Text = "Животное с таким идентификационным номером уже зарегистрировано.";
+            ValidationLabel.IsVisible = true;
             return;
         }
-
-        string species = SpeciesPicker.SelectedItem?.ToString() ?? "Другое";
-        string gender = GenderPicker.SelectedItem?.ToString() ?? "Не указан";
-        string size = SizePicker.SelectedItem?.ToString() ?? "Не указан";
-        string photo = _photo?.FileName ?? "Не прикреплено";
 
         ShelterMainPage.AnimalStore.Animals.Add(
             new ShelterMainPage.AnimalItem(
                 name,
                 number,
                 species,
-                breed,
+                string.IsNullOrWhiteSpace(breed) ? "Не указана" : breed,
                 gender,
-                color,
+                string.IsNullOrWhiteSpace(color) ? "Не указан" : color,
                 size,
-                age,
-                weight,
-                vaccinations,
+                string.IsNullOrWhiteSpace(age) ? "Не указан" : age,
+                string.IsNullOrWhiteSpace(weight) ? "Не указан" : weight,
+                string.IsNullOrWhiteSpace(vaccinations) ? "Не указаны" : vaccinations,
                 "В приюте",
-                photo));
+                _photo?.FileName ?? "Не прикреплено"));
 
-        await DisplayAlert("Готово", $"Животное «{name}» зарегистрировано и добавлено в журнал учета.", "ОК");
-        await Shell.Current.GoToAsync("..");
+        await DisplayAlert(
+            "Готово",
+            $"Животное «{name}» зарегистрировано. Дата приемки: {AdmissionDatePicker.Date:dd.MM.yyyy}.",
+            "ОК");
+
+        await Shell.Current.GoToAsync("//ShelterMainPage");
     }
 
     private async void OnCancelClicked(object? sender, EventArgs e) =>
-        await Shell.Current.GoToAsync("..");
+        await Shell.Current.GoToAsync("//ShelterMainPage");
 }
