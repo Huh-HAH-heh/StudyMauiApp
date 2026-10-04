@@ -74,10 +74,13 @@ public sealed class RequestItem
 
 public sealed record VeterinaryItem(
     string AnimalName,
+    string AnimalNumber,
     string Procedure,
-    DateTime Date)
+    DateTime Date,
+    string Notes)
 {
     public string DateText => Date.ToString("dd.MM.yyyy");
+    public string AnimalText => $"Питомец: {AnimalName} ({AnimalNumber})";
 }
 
 public static class UserStore
@@ -185,8 +188,8 @@ public static class VeterinaryStore
 {
     public static List<VeterinaryItem> Records { get; } =
     [
-        new("Белка", "Вакцинация", DateTime.Today),
-        new("Барсик", "Осмотр", new DateTime(2026, 10, 1)),
-        new("Рекс", "Обработка", new DateTime(2026, 9, 30))
+        new("Белка", "A-104", "Вакцинация", DateTime.Today, "Без дополнительных сведений"),
+        new("Барсик", "A-112", "Осмотр", new DateTime(2026, 10, 1), "Без дополнительных сведений"),
+        new("Рекс", "A-107", "Обработка", new DateTime(2026, 9, 30), "Без дополнительных сведений")
     ];
 }

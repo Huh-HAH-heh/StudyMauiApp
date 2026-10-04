@@ -164,7 +164,7 @@ public partial class ShelterMainPage : ContentPage
             return;
         }
 
-        await DisplayAlert("Ветеринария", "Журнал медицинских манипуляций будет следующим отдельным разделом системы.", "ОК");
+        await Shell.Current.GoToAsync("VeterinaryPage");
     }
 
     private async void OnReportsClicked(object? sender, EventArgs e)

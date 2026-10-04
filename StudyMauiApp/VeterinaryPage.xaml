@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="StudyMauiApp.VeterinaryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Ветеринария"
+    BackgroundColor="#F4F6F8">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="VetInputBorder" TargetType="Border">
+                <Setter Property="Stroke" Value="#E0E5EA" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                <Setter Property="HeightRequest" Value="44" />
+                <Setter Property="Padding" Value="10,0" />
+            </Style>
+
+            <Style x:Key="VetEntry" TargetType="Entry">
+                <Setter Property="TextColor" Value="#20252B" />
+                <Setter Property="PlaceholderColor" Value="#A0AAB5" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <VerticalStackLayout Spacing="3">
+                <Label Text="Ветеринария"
+                       FontSize="24"
+                       FontAttributes="Bold" />
+                <Label x:Name="PageSubtitle"
+                       Text="Журнал медицинских манипуляций с животными приюта."
+                       TextColor="#69747F"
+                       FontSize="12" />
+            </VerticalStackLayout>
+
+            <Border x:Name="CreateRecordCard"
+                    BackgroundColor="White"
+                    Stroke="#E0E5EA"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label Text="Новая ветеринарная запись"
+                           FontSize="18"
+                           FontAttributes="Bold" />
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Животное"
+                               FontSize="12"
+                               TextColor="#69747F" />
+
+                        <Border
+                            BackgroundColor="#FFFFFF"
+                            Stroke="#E0E5EA"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8"
+                            Padding="10">
+
+                            <VerticalStackLayout x:Name="AnimalOptions"
+                                                 Spacing="8" />
+                        </Border>
+
+                        <Label x:Name="SelectedAnimalLabel"
+                               Text="Животное не выбрано"
+                               TextColor="#69747F"
+                               FontSize="12" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Дата медицинской манипуляции"
+                               FontSize="12"
+                               TextColor="#69747F" />
+
+                        <Border Style="{StaticResource VetInputBorder}">
+                            <Entry x:Name="DateEntry"
+                                   Style="{StaticResource VetEntry}"
+                                   Placeholder="ДД.ММ.ГГГГ" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Вид медицинской манипуляции"
+                               FontSize="12"
+                               TextColor="#69747F" />
+
+                        <Border Style="{StaticResource VetInputBorder}">
+                            <Entry x:Name="ProcedureEntry"
+                                   Style="{StaticResource VetEntry}"
+                                   Placeholder="Например: вакцинация" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Дополнительные сведения"
+                               FontSize="12"
+                               TextColor="#69747F" />
+
+                        <Border
+                            BackgroundColor="#FFFFFF"
+                            Stroke="#E0E5EA"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 6"
+                            Padding="10">
+
+                            <Editor x:Name="NotesEditor"
+                                    Placeholder="Результат осмотра, назначение лечения и т.п."
+                                    PlaceholderColor="#A0AAB5"
+                                    TextColor="#20252B"
+                                    BackgroundColor="Transparent"
+                                    AutoSize="TextChanges"
+                                    MinimumHeightRequest="90" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Label x:Name="ValidationLabel"
+                           IsVisible="False"
+                           TextColor="#D64545"
+                           FontSize="12" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Button Text="Отмена"
+                                Clicked="OnBackClicked"
+                                BackgroundColor="#E9EEF3"
+                                TextColor="#20252B"
+                                CornerRadius="8"
+                                HeightRequest="44" />
+
+                        <Button Grid.Column="1"
+                                Text="Сохранить запись"
+                                Clicked="OnSaveClicked"
+                                BackgroundColor="#2F80ED"
+                                TextColor="White"
+                                CornerRadius="8"
+                                HeightRequest="44" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#E0E5EA"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12"
+                Padding="20">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Журнал медицинских манипуляций"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            <Label x:Name="RecordsCountLabel"
+                                   Style="{StaticResource Muted}" />
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="1"
+                                Text="Назад"
+                                Clicked="OnBackClicked"
+                                BackgroundColor="#E9EEF3"
+                                TextColor="#20252B"
+                                CornerRadius="8" />
+                    </Grid>
+
+                    <CollectionView x:Name="RecordsView"
+                                    SelectionMode="None">
+
+                        <CollectionView.EmptyView>
+                            <Label Text="Медицинских записей пока нет."
+                                   TextColor="#69747F"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="0,20" />
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="0,0,0,10"
+                                    Padding="14"
+                                    BackgroundColor="#F8FAFC"
+                                    Stroke="#E3E8ED"
+                                    StrokeShape="RoundRectangle 8">
+
+                                    <Grid ColumnDefinitions="*,Auto"
+                                          RowDefinitions="Auto,Auto,Auto"
+                                          ColumnSpacing="12"
+                                          RowSpacing="3">
+
+                                        <Label Text="{Binding Procedure}"
+                                               FontSize="14"
+                                               FontAttributes="Bold" />
+
+                                        <Label Grid.Column="1"
+                                               Text="{Binding DateText}"
+                                               Style="{StaticResource Muted}"
+                                               HorizontalTextAlignment="End" />
+
+                                        <Label Grid.Row="1"
+                                               Text="{Binding AnimalText}"
+                                               FontSize="13" />
+
+                                        <Label Grid.Row="2"
+                                               Text="{Binding Notes}"
+                                               Style="{StaticResource Muted}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
