@@ -56,7 +56,6 @@ public partial class RequestsPage : ContentPage
     {
         AnimalPicker.ItemsSource = AnimalStore.Animals
             .Where(a => a.Status != "На лечении")
-            .Select(a => $"{a.Number} — {a.Name}")
             .ToList();
 
         AnimalPicker.SelectedIndex =
@@ -98,7 +97,10 @@ public partial class RequestsPage : ContentPage
 
         if (!SessionObject.IsClient)
         {
-            await DisplayAlert("Нет доступа", "Заявку на прием или взятие животного оформляет клиент.", "ОК");
+            await DisplayAlert(
+                "Нет доступа",
+                "Заявку на прием или взятие животного оформляет клиент.",
+                "ОК");
             return;
         }
 
@@ -120,25 +122,15 @@ public partial class RequestsPage : ContentPage
 
         if (type == RequestType.Adoption)
         {
-            if (AnimalPicker.SelectedItem is not string selected ||
-                string.IsNullOrWhiteSpace(selected))
+            if (AnimalPicker.SelectedItem is not AnimalItem selectedAnimal)
             {
                 ValidationLabel.Text = "Выберите питомца, которого хотите взять в семью.";
                 ValidationLabel.IsVisible = true;
                 return;
             }
 
-            int separator = selected.IndexOf(" — ", StringComparison.Ordinal);
-
-            if (separator < 0)
-            {
-                ValidationLabel.Text = "Не удалось определить выбранного питомца.";
-                ValidationLabel.IsVisible = true;
-                return;
-            }
-
-            animalNumber = selected[..separator];
-            animalName = selected[(separator + 3)..];
+            animalNumber = selectedAnimal.Number;
+            animalName = selectedAnimal.Name;
         }
         else
         {
@@ -169,7 +161,10 @@ public partial class RequestsPage : ContentPage
                 Date = RequestDatePicker.Date
             });
 
-        await DisplayAlert("Заявка оформлена", $"Заявка №{id} зарегистрирована.", "ОК");
+        await DisplayAlert(
+            "Заявка оформлена",
+            $"Заявка №{id} зарегистрирована.",
+            "ОК");
 
         SurrenderAnimalEntry.Text = "";
         LoadRequests();
@@ -179,7 +174,10 @@ public partial class RequestsPage : ContentPage
     {
         if (!SessionObject.IsAdmin && !SessionObject.IsVolonteer)
         {
-            await DisplayAlert("Нет доступа", "Оформить выдачу могут администратор и волонтер.", "ОК");
+            await DisplayAlert(
+                "Нет доступа",
+                "Оформить выдачу могут администратор и волонтер.",
+                "ОК");
             return;
         }
 
@@ -188,17 +186,24 @@ public partial class RequestsPage : ContentPage
             return;
 
         var animal = AnimalStore.Animals
-            .FirstOrDefault(a => a.Number.Equals(request.AnimalNumber, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(a =>
+                a.Number.Equals(request.AnimalNumber, StringComparison.OrdinalIgnoreCase));
 
         if (animal is null)
         {
-            await DisplayAlert("Ошибка", "Питомец из заявки не найден в журнале.", "ОК");
+            await DisplayAlert(
+                "Ошибка",
+                "Питомец из заявки не найден в журнале.",
+                "ОК");
             return;
         }
 
         if (animal.Status == "На лечении")
         {
-            await DisplayAlert("Нельзя оформить выдачу", "Животное находится на лечении.", "ОК");
+            await DisplayAlert(
+                "Нельзя оформить выдачу",
+                "Животное находится на лечении.",
+                "ОК");
             return;
         }
 
@@ -215,7 +220,10 @@ public partial class RequestsPage : ContentPage
         AnimalStore.AdoptedCount++;
         request.Status = "Выдано в семью";
 
-        await DisplayAlert("Готово", $"Животное «{animal.Name}» выдано в семью.", "ОК");
+        await DisplayAlert(
+            "Готово",
+            $"Животное «{animal.Name}» выдано в семью.",
+            "ОК");
 
         LoadRequests();
     }

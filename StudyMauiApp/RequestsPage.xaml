@@ -6,6 +6,35 @@
     Title="Заявки"
     BackgroundColor="#F4F6F8">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="RequestInputBorder" TargetType="Border">
+                <Setter Property="Stroke" Value="#E0E5EA" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                <Setter Property="HeightRequest" Value="44" />
+                <Setter Property="Padding" Value="10,0" />
+            </Style>
+
+            <Style x:Key="RequestPicker" TargetType="Picker">
+                <Setter Property="TextColor" Value="#20252B" />
+                <Setter Property="TitleColor" Value="#A0AAB5" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="RequestEntry" TargetType="Entry">
+                <Setter Property="TextColor" Value="#20252B" />
+                <Setter Property="PlaceholderColor" Value="#A0AAB5" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
@@ -41,18 +70,22 @@
                             <Label Text="ФИО клиента"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Entry x:Name="ClientNameEntry"
-                                   HeightRequest="42"
-                                   IsReadOnly="True" />
+                            <Border Style="{StaticResource RequestInputBorder}">
+                                <Entry x:Name="ClientNameEntry"
+                                       Style="{StaticResource RequestEntry}"
+                                       IsReadOnly="True" />
+                            </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="4">
                             <Label Text="Номер телефона"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Entry x:Name="PhoneEntry"
-                                   HeightRequest="42"
-                                   IsReadOnly="True" />
+                            <Border Style="{StaticResource RequestInputBorder}">
+                                <Entry x:Name="PhoneEntry"
+                                       Style="{StaticResource RequestEntry}"
+                                       IsReadOnly="True" />
+                            </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="1"
@@ -61,16 +94,17 @@
                             <Label Text="Тип заявки"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Picker x:Name="RequestTypePicker"
-                                    Title="Выберите тип заявки"
-                                    SelectedIndexChanged="OnRequestTypeChanged"
-                                    HeightRequest="42"
-                                    TextColor="#20252B">
-                                <Picker.Items>
-                                    <x:String>Взятие животного в семью</x:String>
-                                    <x:String>Сдача животного в приют</x:String>
-                                </Picker.Items>
-                            </Picker>
+                            <Border Style="{StaticResource RequestInputBorder}">
+                                <Picker x:Name="RequestTypePicker"
+                                        Style="{StaticResource RequestPicker}"
+                                        Title="Выберите тип заявки"
+                                        SelectedIndexChanged="OnRequestTypeChanged">
+                                    <Picker.Items>
+                                        <x:String>Взятие животного в семью</x:String>
+                                        <x:String>Сдача животного в приют</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout x:Name="AdoptionFields"
@@ -80,10 +114,12 @@
                             <Label Text="Питомец"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Picker x:Name="AnimalPicker"
-                                    Title="Выберите питомца"
-                                    HeightRequest="42"
-                                    TextColor="#20252B" />
+                            <Border Style="{StaticResource RequestInputBorder}">
+                                <Picker x:Name="AnimalPicker"
+                                        Style="{StaticResource RequestPicker}"
+                                        Title="Выберите питомца"
+                                        ItemDisplayBinding="{Binding DisplayName}" />
+                            </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout x:Name="SurrenderFields"
@@ -94,10 +130,20 @@
                             <Label Text="Информация о животном"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Editor x:Name="SurrenderAnimalEntry"
-                                    Placeholder="Например: собака, метис, самец, около 4 лет"
-                                    AutoSize="TextChanges"
-                                    MinimumHeightRequest="90" />
+                            <Border
+                                BackgroundColor="#FFFFFF"
+                                Stroke="#E0E5EA"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 6"
+                                Padding="10">
+                                <Editor x:Name="SurrenderAnimalEntry"
+                                        Placeholder="Например: собака, метис, самец, около 4 лет"
+                                        PlaceholderColor="#A0AAB5"
+                                        TextColor="#20252B"
+                                        BackgroundColor="Transparent"
+                                        AutoSize="TextChanges"
+                                        MinimumHeightRequest="90" />
+                            </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="3"
@@ -106,9 +152,13 @@
                             <Label Text="Дата оформления"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <DatePicker x:Name="RequestDatePicker"
-                                        Format="dd.MM.yyyy"
-                                        HeightRequest="42" />
+                            <Border Style="{StaticResource RequestInputBorder}">
+                                <DatePicker x:Name="RequestDatePicker"
+                                            TextColor="#20252B"
+                                            BackgroundColor="Transparent"
+                                            VerticalOptions="Center"
+                                            Format="dd.MM.yyyy" />
+                            </Border>
                         </VerticalStackLayout>
 
                     </Grid>

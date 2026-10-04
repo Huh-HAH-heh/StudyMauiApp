@@ -39,6 +39,7 @@ public sealed record AnimalItem(
     string Photo)
 {
     public string Details => $"{Species} • {Breed} • {Gender} • {Age}";
+    public string DisplayName => $"{Number} — {Name}";
 }
 
 public sealed class RequestItem
