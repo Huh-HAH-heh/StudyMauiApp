@@ -220,11 +220,11 @@ public partial class ShelterMainPage : ContentPage
     {
         if (!CanCreateRequest())
         {
-            await DisplayAlert("Нет доступа", "Создавать заявки могут клиент, администратор и волонтер.", "ОК");
+            await DisplayAlert("Нет доступа", "Раздел заявок доступен клиенту и сотрудникам приюта.", "ОК");
             return;
         }
 
-        await DisplayAlert("Заявка", "Форма заявки будет следующим отдельным разделом системы.", "ОК");
+        await Shell.Current.GoToAsync("RequestsPage");
     }
 
     private async void OnVetClicked(object? sender, EventArgs e)
@@ -310,7 +310,7 @@ public partial class ShelterMainPage : ContentPage
             return;
         }
 
-        await DisplayAlert("Заявки", "Раздел заявок подготовлен как следующий функциональный экран.", "ОК");
+        await Shell.Current.GoToAsync("RequestsPage");
     }
 
     public sealed record AnimalItem(
