@@ -5,17 +5,19 @@ namespace StudyMauiApp;
 public partial class RequestsPage : ContentPage
 {
     private readonly ObservableCollection<RequestItem> _visibleRequests = [];
+    private RequestType _requestType = RequestType.Adoption;
+    private AnimalItem? _selectedAnimal;
 
     public RequestsPage()
     {
         InitializeComponent();
 
         RequestDatePicker.Date = DateTime.Today;
-        RequestTypePicker.SelectedIndex = 0;
 
         LoadClientData();
         LoadAvailableAnimals();
         ApplyRoleUi();
+        UpdateRequestTypeUi();
         LoadRequests();
     }
 
@@ -26,6 +28,7 @@ public partial class RequestsPage : ContentPage
         LoadClientData();
         LoadAvailableAnimals();
         ApplyRoleUi();
+        UpdateRequestTypeUi();
         LoadRequests();
     }
 
@@ -54,20 +57,94 @@ public partial class RequestsPage : ContentPage
 
     private void LoadAvailableAnimals()
     {
-        AnimalPicker.ItemsSource = AnimalStore.Animals
+        AnimalOptions.Children.Clear();
+        _selectedAnimal = null;
+        SelectedAnimalLabel.Text = "Питомец не выбран";
+
+        var animals = AnimalStore.Animals
             .Where(a => a.Status != "На лечении")
             .ToList();
 
-        AnimalPicker.SelectedIndex =
-            AnimalPicker.Items.Count > 0 ? 0 : -1;
+        foreach (var animal in animals)
+        {
+            var button = new Button
+            {
+                Text = animal.DisplayName,
+                BackgroundColor = Color.FromArgb("#F8FAFC"),
+                TextColor = Color.FromArgb("#20252B"),
+                BorderColor = Color.FromArgb("#E0E5EA"),
+                BorderWidth = 1,
+                CornerRadius = 8,
+                HeightRequest = 42,
+                Padding = new Thickness(12, 6)
+            };
+
+            button.Clicked += (_, _) => SelectAnimal(animal, button);
+            AnimalOptions.Children.Add(button);
+        }
+
+        if (animals.Count == 0)
+        {
+            AnimalOptions.Children.Add(new Label
+            {
+                Text = "Нет доступных питомцев.",
+                TextColor = Color.FromArgb("#69747F"),
+                FontSize = 12,
+                Padding = new Thickness(4)
+            });
+        }
     }
 
-    private void OnRequestTypeChanged(object? sender, EventArgs e)
+    private void SelectAnimal(AnimalItem animal, Button selectedButton)
     {
-        bool adoption = RequestTypePicker.SelectedIndex == 0;
+        foreach (var child in AnimalOptions.Children.OfType<Button>())
+        {
+            child.BackgroundColor = Color.FromArgb("#F8FAFC");
+            child.TextColor = Color.FromArgb("#20252B");
+        }
+
+        selectedButton.BackgroundColor = Color.FromArgb("#2F80ED");
+        selectedButton.TextColor = Colors.White;
+
+        _selectedAnimal = animal;
+        SelectedAnimalLabel.Text = $"Выбран: {animal.Name} ({animal.Number})";
+    }
+
+    private void OnAdoptionTypeClicked(object? sender, EventArgs e)
+    {
+        _requestType = RequestType.Adoption;
+        UpdateRequestTypeUi();
+    }
+
+    private void OnSurrenderTypeClicked(object? sender, EventArgs e)
+    {
+        _requestType = RequestType.Surrender;
+        UpdateRequestTypeUi();
+    }
+
+    private void UpdateRequestTypeUi()
+    {
+        bool adoption = _requestType == RequestType.Adoption;
 
         AdoptionFields.IsVisible = adoption;
         SurrenderFields.IsVisible = !adoption;
+
+        if (adoption)
+        {
+            AdoptionTypeButton.BackgroundColor = Color.FromArgb("#2F80ED");
+            AdoptionTypeButton.TextColor = Colors.White;
+
+            SurrenderTypeButton.BackgroundColor = Color.FromArgb("#E9EEF3");
+            SurrenderTypeButton.TextColor = Color.FromArgb("#20252B");
+        }
+        else
+        {
+            AdoptionTypeButton.BackgroundColor = Color.FromArgb("#E9EEF3");
+            AdoptionTypeButton.TextColor = Color.FromArgb("#20252B");
+
+            SurrenderTypeButton.BackgroundColor = Color.FromArgb("#2F80ED");
+            SurrenderTypeButton.TextColor = Colors.White;
+        }
     }
 
     private void LoadRequests()
@@ -84,8 +161,12 @@ public partial class RequestsPage : ContentPage
                 r.Phone.Equals(user.Phone, StringComparison.OrdinalIgnoreCase));
         }
 
-        foreach (var request in requests.OrderByDescending(r => r.Date).ThenByDescending(r => r.Id))
+        foreach (var request in requests
+                     .OrderByDescending(r => r.Date)
+                     .ThenByDescending(r => r.Id))
+        {
             _visibleRequests.Add(request);
+        }
 
         RequestsView.ItemsSource = _visibleRequests;
         RequestsCountLabel.Text = $"Всего заявок: {_visibleRequests.Count}";
@@ -112,25 +193,21 @@ public partial class RequestsPage : ContentPage
             return;
         }
 
-        var type = RequestTypePicker.SelectedIndex == 0
-            ? RequestType.Adoption
-            : RequestType.Surrender;
-
         string animalNumber = "";
         string animalName = "";
         string animalDescription = "";
 
-        if (type == RequestType.Adoption)
+        if (_requestType == RequestType.Adoption)
         {
-            if (AnimalPicker.SelectedItem is not AnimalItem selectedAnimal)
+            if (_selectedAnimal is null)
             {
                 ValidationLabel.Text = "Выберите питомца, которого хотите взять в семью.";
                 ValidationLabel.IsVisible = true;
                 return;
             }
 
-            animalNumber = selectedAnimal.Number;
-            animalName = selectedAnimal.Name;
+            animalNumber = _selectedAnimal.Number;
+            animalName = _selectedAnimal.Name;
         }
         else
         {
@@ -154,7 +231,7 @@ public partial class RequestsPage : ContentPage
                 Id = id,
                 ClientName = user.FullName,
                 Phone = user.Phone,
-                TypeValue = type,
+                TypeValue = _requestType,
                 AnimalNumber = animalNumber,
                 AnimalName = animalName,
                 AnimalDescription = animalDescription,
@@ -167,6 +244,7 @@ public partial class RequestsPage : ContentPage
             "ОК");
 
         SurrenderAnimalEntry.Text = "";
+        LoadAvailableAnimals();
         LoadRequests();
     }
 

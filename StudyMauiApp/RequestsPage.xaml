@@ -17,15 +17,6 @@
                 <Setter Property="Padding" Value="10,0" />
             </Style>
 
-            <Style x:Key="RequestPicker" TargetType="Picker">
-                <Setter Property="TextColor" Value="#20252B" />
-                <Setter Property="TitleColor" Value="#A0AAB5" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="HorizontalTextAlignment" Value="Start" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Center" />
-            </Style>
-
             <Style x:Key="RequestEntry" TargetType="Entry">
                 <Setter Property="TextColor" Value="#20252B" />
                 <Setter Property="PlaceholderColor" Value="#A0AAB5" />
@@ -90,52 +81,73 @@
 
                         <VerticalStackLayout Grid.Row="1"
                                              Grid.ColumnSpan="2"
-                                             Spacing="4">
+                                             Spacing="6">
                             <Label Text="Тип заявки"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Border Style="{StaticResource RequestInputBorder}">
-                                <Picker x:Name="RequestTypePicker"
-                                        Style="{StaticResource RequestPicker}"
-                                        Title="Выберите тип заявки"
-                                        SelectedIndexChanged="OnRequestTypeChanged">
-                                    <Picker.Items>
-                                        <x:String>Взятие животного в семью</x:String>
-                                        <x:String>Сдача животного в приют</x:String>
-                                    </Picker.Items>
-                                </Picker>
-                            </Border>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <Button x:Name="AdoptionTypeButton"
+                                        Text="Взять в семью"
+                                        Clicked="OnAdoptionTypeClicked"
+                                        BackgroundColor="#2F80ED"
+                                        TextColor="White"
+                                        CornerRadius="8"
+                                        HeightRequest="42" />
+
+                                <Button Grid.Column="1"
+                                        x:Name="SurrenderTypeButton"
+                                        Text="Сдать в приют"
+                                        Clicked="OnSurrenderTypeClicked"
+                                        BackgroundColor="#E9EEF3"
+                                        TextColor="#20252B"
+                                        CornerRadius="8"
+                                        HeightRequest="42" />
+                            </Grid>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout x:Name="AdoptionFields"
                                              Grid.Row="2"
                                              Grid.ColumnSpan="2"
-                                             Spacing="4">
+                                             Spacing="6">
                             <Label Text="Питомец"
                                    FontSize="12"
                                    TextColor="#69747F" />
-                            <Border Style="{StaticResource RequestInputBorder}">
-                                <Picker x:Name="AnimalPicker"
-                                        Style="{StaticResource RequestPicker}"
-                                        Title="Выберите питомца"
-                                        ItemDisplayBinding="{Binding DisplayName}" />
+
+                            <Border
+                                BackgroundColor="#FFFFFF"
+                                Stroke="#E0E5EA"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="10">
+
+                                <VerticalStackLayout x:Name="AnimalOptions"
+                                                     Spacing="8" />
+
                             </Border>
+
+                            <Label x:Name="SelectedAnimalLabel"
+                                   Text="Питомец не выбран"
+                                   TextColor="#69747F"
+                                   FontSize="12" />
                         </VerticalStackLayout>
 
                         <VerticalStackLayout x:Name="SurrenderFields"
                                              Grid.Row="2"
                                              Grid.ColumnSpan="2"
-                                             Spacing="4"
+                                             Spacing="6"
                                              IsVisible="False">
                             <Label Text="Информация о животном"
                                    FontSize="12"
                                    TextColor="#69747F" />
+
                             <Border
                                 BackgroundColor="#FFFFFF"
                                 Stroke="#E0E5EA"
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 6"
                                 Padding="10">
+
                                 <Editor x:Name="SurrenderAnimalEntry"
                                         Placeholder="Например: собака, метис, самец, около 4 лет"
                                         PlaceholderColor="#A0AAB5"
@@ -143,6 +155,7 @@
                                         BackgroundColor="Transparent"
                                         AutoSize="TextChanges"
                                         MinimumHeightRequest="90" />
+
                             </Border>
                         </VerticalStackLayout>
 
@@ -152,6 +165,7 @@
                             <Label Text="Дата оформления"
                                    FontSize="12"
                                    TextColor="#69747F" />
+
                             <Border Style="{StaticResource RequestInputBorder}">
                                 <DatePicker x:Name="RequestDatePicker"
                                             TextColor="#20252B"
