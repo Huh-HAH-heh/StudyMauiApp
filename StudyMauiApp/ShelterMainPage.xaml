@@ -295,45 +295,100 @@
                 </Grid>
 
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+
                     <Border Grid.Column="0" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="8">
-                            <Label Text="Последние заявки" Style="{StaticResource SectionTitle}" />
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Text="Взятие в семью — Иванова А." FontSize="13" />
-                                <Label Grid.Column="1" Text="02.10.2026" Style="{StaticResource Muted}" />
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="Последние заявки" Style="{StaticResource SectionTitle}" />
+                                    <Label x:Name="RecentRequestsCountLabel"
+                                           Text="Последние 3 заявки"
+                                           Style="{StaticResource Muted}" />
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1"
+                                        Text="Все заявки"
+                                        Clicked="OnRequestsClicked"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#2F80ED" />
                             </Grid>
-                            <BoxView HeightRequest="1" Color="#E7EBEF" />
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Text="Сдача животного — Петров И." FontSize="13" />
-                                <Label Grid.Column="1" Text="01.10.2026" Style="{StaticResource Muted}" />
-                            </Grid>
-                            <BoxView HeightRequest="1" Color="#E7EBEF" />
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Text="Взятие в семью — Смирнова Е." FontSize="13" />
-                                <Label Grid.Column="1" Text="30.09.2026" Style="{StaticResource Muted}" />
-                            </Grid>
+
+                            <CollectionView x:Name="RecentRequestsView"
+                                            SelectionMode="None">
+                                <CollectionView.EmptyView>
+                                    <Label Text="Заявок пока нет."
+                                           Style="{StaticResource Muted}"
+                                           HorizontalTextAlignment="Center"
+                                           Margin="0,12" />
+                                </CollectionView.EmptyView>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*,Auto"
+                                              RowDefinitions="Auto,Auto,Auto"
+                                              RowSpacing="2">
+                                            <Label Text="{Binding Type}"
+                                                   FontSize="13"
+                                                   FontAttributes="Bold" />
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding DateText}"
+                                                   Style="{StaticResource Muted}"
+                                                   HorizontalTextAlignment="End" />
+                                            <Label Grid.Row="1"
+                                                   Text="{Binding ClientName}"
+                                                   FontSize="12" />
+                                            <Label Grid.Row="2"
+                                                   Text="{Binding AnimalText}"
+                                                   Style="{StaticResource Muted}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Column="1" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="8">
-                            <Label Text="Ветеринарные манипуляции" Style="{StaticResource SectionTitle}" />
                             <Grid ColumnDefinitions="*,Auto">
-                                <Label Text="Вакцинация — Белка" FontSize="13" />
-                                <Label Grid.Column="1" Text="Сегодня" Style="{StaticResource Muted}" />
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="Ветеринарные манипуляции"
+                                           Style="{StaticResource SectionTitle}" />
+                                    <Label Text="Последние записи"
+                                           Style="{StaticResource Muted}" />
+                                </VerticalStackLayout>
                             </Grid>
-                            <BoxView HeightRequest="1" Color="#E7EBEF" />
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Text="Осмотр — Барсик" FontSize="13" />
-                                <Label Grid.Column="1" Text="01.10.2026" Style="{StaticResource Muted}" />
-                            </Grid>
-                            <BoxView HeightRequest="1" Color="#E7EBEF" />
-                            <Grid ColumnDefinitions="*,Auto">
-                                <Label Text="Обработка — Рекс" FontSize="13" />
-                                <Label Grid.Column="1" Text="30.09.2026" Style="{StaticResource Muted}" />
-                            </Grid>
+
+                            <CollectionView x:Name="RecentVetView"
+                                            SelectionMode="None">
+                                <CollectionView.EmptyView>
+                                    <Label Text="Медицинских записей пока нет."
+                                           Style="{StaticResource Muted}"
+                                           HorizontalTextAlignment="Center"
+                                           Margin="0,12" />
+                                </CollectionView.EmptyView>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*,Auto"
+                                              RowDefinitions="Auto,Auto"
+                                              RowSpacing="2">
+                                            <Label Text="{Binding Procedure}"
+                                                   FontSize="13"
+                                                   FontAttributes="Bold" />
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding DateText}"
+                                                   Style="{StaticResource Muted}"
+                                                   HorizontalTextAlignment="End" />
+                                            <Label Grid.Row="1"
+                                                   Text="{Binding AnimalName}"
+                                                   Style="{StaticResource Muted}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </VerticalStackLayout>
                     </Border>
+
                 </Grid>
 
             </VerticalStackLayout>

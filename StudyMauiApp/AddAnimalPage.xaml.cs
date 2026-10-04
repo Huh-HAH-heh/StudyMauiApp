@@ -32,8 +32,8 @@ public partial class AddAnimalPage : ContentPage
     {
         ValidationLabel.IsVisible = false;
 
-        if (ShelterMainPage.SessionObject.CurrentUser is not
-            { Role: ShelterMainPage.UserRole.Admin or ShelterMainPage.UserRole.Volonteer })
+        if (SessionObject.CurrentUser is not
+            { Role: UserRole.Admin or UserRole.Volonteer })
         {
             await DisplayAlert(
                 "Нет доступа",
@@ -70,7 +70,7 @@ public partial class AddAnimalPage : ContentPage
             return;
         }
 
-        if (ShelterMainPage.AnimalStore.Animals.Any(a =>
+        if (AnimalStore.Animals.Any(a =>
                 a.Number.Equals(number, StringComparison.OrdinalIgnoreCase)))
         {
             ValidationLabel.Text = "Животное с таким идентификационным номером уже зарегистрировано.";
@@ -78,8 +78,8 @@ public partial class AddAnimalPage : ContentPage
             return;
         }
 
-        ShelterMainPage.AnimalStore.Animals.Add(
-            new ShelterMainPage.AnimalItem(
+        AnimalStore.Animals.Add(
+            new AnimalItem(
                 name,
                 number,
                 species,

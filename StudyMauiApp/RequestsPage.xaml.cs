@@ -4,69 +4,6 @@ namespace StudyMauiApp;
 
 public partial class RequestsPage : ContentPage
 {
-    public enum RequestType
-    {
-        Adoption,
-        Surrender
-    }
-
-    public sealed class RequestItem
-    {
-        public int Id { get; init; }
-        public string ClientName { get; init; } = "";
-        public string Phone { get; init; } = "";
-        public RequestType TypeValue { get; init; }
-        public string AnimalNumber { get; init; } = "";
-        public string AnimalName { get; init; } = "";
-        public string AnimalDescription { get; init; } = "";
-        public DateTime Date { get; init; }
-        public string Status { get; set; } = "Новая";
-
-        public string Type =>
-            TypeValue == RequestType.Adoption
-                ? "Взятие животного в семью"
-                : "Сдача животного в приют";
-
-        public string DateText => Date.ToString("dd.MM.yyyy");
-
-        public string AnimalText =>
-            TypeValue == RequestType.Adoption
-                ? $"Питомец: {AnimalName} ({AnimalNumber})"
-                : $"Животное: {AnimalDescription}";
-
-        public bool CanProcess =>
-            TypeValue == RequestType.Adoption &&
-            Status == "Новая" &&
-            (ShelterMainPage.SessionObject.IsAdmin ||
-             ShelterMainPage.SessionObject.IsVolonteer);
-    }
-
-    public static class RequestStore
-    {
-        public static List<RequestItem> Requests { get; } =
-        [
-            new RequestItem
-            {
-                Id = 1,
-                ClientName = "Иванова Анна",
-                Phone = "+7 900 111-11-11",
-                TypeValue = RequestType.Adoption,
-                AnimalNumber = "A-118",
-                AnimalName = "Мурка",
-                Date = new DateTime(2026, 10, 2)
-            },
-            new RequestItem
-            {
-                Id = 2,
-                ClientName = "Петров Иван",
-                Phone = "+7 900 222-22-22",
-                TypeValue = RequestType.Surrender,
-                AnimalDescription = "Собака, метис, самец, около 5 лет",
-                Date = new DateTime(2026, 10, 1)
-            }
-        ];
-    }
-
     private readonly ObservableCollection<RequestItem> _visibleRequests = [];
 
     public RequestsPage()
@@ -94,10 +31,8 @@ public partial class RequestsPage : ContentPage
 
     private void ApplyRoleUi()
     {
-        bool isClient = ShelterMainPage.SessionObject.IsClient;
-        bool isEmployee =
-            ShelterMainPage.SessionObject.IsAdmin ||
-            ShelterMainPage.SessionObject.IsVolonteer;
+        bool isClient = SessionObject.IsClient;
+        bool isEmployee = SessionObject.IsAdmin || SessionObject.IsVolonteer;
 
         CreateRequestCard.IsVisible = isClient;
 
@@ -111,7 +46,7 @@ public partial class RequestsPage : ContentPage
 
     private void LoadClientData()
     {
-        var user = ShelterMainPage.SessionObject.CurrentUser;
+        var user = SessionObject.CurrentUser;
 
         ClientNameEntry.Text = user?.FullName ?? "";
         PhoneEntry.Text = user?.Phone ?? "";
@@ -119,7 +54,7 @@ public partial class RequestsPage : ContentPage
 
     private void LoadAvailableAnimals()
     {
-        AnimalPicker.ItemsSource = ShelterMainPage.AnimalStore.Animals
+        AnimalPicker.ItemsSource = AnimalStore.Animals
             .Where(a => a.Status != "На лечении")
             .Select(a => $"{a.Number} — {a.Name}")
             .ToList();
@@ -140,10 +75,10 @@ public partial class RequestsPage : ContentPage
     {
         _visibleRequests.Clear();
 
-        var user = ShelterMainPage.SessionObject.CurrentUser;
+        var user = SessionObject.CurrentUser;
         IEnumerable<RequestItem> requests = RequestStore.Requests;
 
-        if (ShelterMainPage.SessionObject.IsClient && user is not null)
+        if (SessionObject.IsClient && user is not null)
         {
             requests = requests.Where(r =>
                 r.ClientName.Equals(user.FullName, StringComparison.OrdinalIgnoreCase) ||
@@ -161,16 +96,13 @@ public partial class RequestsPage : ContentPage
     {
         ValidationLabel.IsVisible = false;
 
-        if (!ShelterMainPage.SessionObject.IsClient)
+        if (!SessionObject.IsClient)
         {
-            await DisplayAlert(
-                "Нет доступа",
-                "Заявку на прием или взятие животного оформляет клиент.",
-                "ОК");
+            await DisplayAlert("Нет доступа", "Заявку на прием или взятие животного оформляет клиент.", "ОК");
             return;
         }
 
-        var user = ShelterMainPage.SessionObject.CurrentUser;
+        var user = SessionObject.CurrentUser;
 
         if (user is null)
         {
@@ -237,10 +169,7 @@ public partial class RequestsPage : ContentPage
                 Date = RequestDatePicker.Date
             });
 
-        await DisplayAlert(
-            "Заявка оформлена",
-            $"Заявка №{id} зарегистрирована.",
-            "ОК");
+        await DisplayAlert("Заявка оформлена", $"Заявка №{id} зарегистрирована.", "ОК");
 
         SurrenderAnimalEntry.Text = "";
         LoadRequests();
@@ -248,13 +177,9 @@ public partial class RequestsPage : ContentPage
 
     private async void OnProcessClicked(object? sender, EventArgs e)
     {
-        if (!ShelterMainPage.SessionObject.IsAdmin &&
-            !ShelterMainPage.SessionObject.IsVolonteer)
+        if (!SessionObject.IsAdmin && !SessionObject.IsVolonteer)
         {
-            await DisplayAlert(
-                "Нет доступа",
-                "Оформить выдачу могут администратор и волонтер.",
-                "ОК");
+            await DisplayAlert("Нет доступа", "Оформить выдачу могут администратор и волонтер.", "ОК");
             return;
         }
 
@@ -262,25 +187,18 @@ public partial class RequestsPage : ContentPage
             button.CommandParameter is not RequestItem request)
             return;
 
-        var animal = ShelterMainPage.AnimalStore.Animals
-            .FirstOrDefault(a =>
-                a.Number.Equals(request.AnimalNumber, StringComparison.OrdinalIgnoreCase));
+        var animal = AnimalStore.Animals
+            .FirstOrDefault(a => a.Number.Equals(request.AnimalNumber, StringComparison.OrdinalIgnoreCase));
 
         if (animal is null)
         {
-            await DisplayAlert(
-                "Ошибка",
-                "Питомец из заявки не найден в журнале.",
-                "ОК");
+            await DisplayAlert("Ошибка", "Питомец из заявки не найден в журнале.", "ОК");
             return;
         }
 
         if (animal.Status == "На лечении")
         {
-            await DisplayAlert(
-                "Нельзя оформить выдачу",
-                "Животное находится на лечении.",
-                "ОК");
+            await DisplayAlert("Нельзя оформить выдачу", "Животное находится на лечении.", "ОК");
             return;
         }
 
@@ -293,14 +211,11 @@ public partial class RequestsPage : ContentPage
         if (!confirm)
             return;
 
-        ShelterMainPage.AnimalStore.Animals.Remove(animal);
-        ShelterMainPage.AnimalStore.AdoptedCount++;
+        AnimalStore.Animals.Remove(animal);
+        AnimalStore.AdoptedCount++;
         request.Status = "Выдано в семью";
 
-        await DisplayAlert(
-            "Готово",
-            $"Животное «{animal.Name}» выдано в семью.",
-            "ОК");
+        await DisplayAlert("Готово", $"Животное «{animal.Name}» выдано в семью.", "ОК");
 
         LoadRequests();
     }

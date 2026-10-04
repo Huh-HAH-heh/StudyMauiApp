@@ -4,99 +4,6 @@ namespace StudyMauiApp;
 
 public partial class ShelterMainPage : ContentPage
 {
-    public class User
-    {
-        public string FullName { get; set; } = "";
-        public string Phone { get; set; } = "";
-        public string Login { get; set; } = "";
-        public string Password { get; set; } = "";
-        public UserRole Role { get; set; }
-    }
-
-    public enum UserRole
-    {
-        Anonim,
-        Client,
-        Admin,
-        Volonteer,
-        Veterenar
-    }
-
-    public static class UserStore
-    {
-        public static List<User> Users { get; } =
-        [
-            new User
-            {
-                FullName = "Nerd",
-                Phone = "+7 666 666-66-66",
-                Login = "Nerd",
-                Password = "Nerd",
-                Role = UserRole.Admin
-            },
-            new User
-            {
-                FullName = "GOON",
-                Phone = "+7 900 000-00-00",
-                Login = "GOON",
-                Password = "GOON",
-                Role = UserRole.Client
-            },
-            new User
-            {
-                FullName = "WERDO",
-                Phone = "+7 900 000-00-00",
-                Login = "WERDO",
-                Password = "WERDO",
-                Role = UserRole.Volonteer
-            },
-            new User
-            {
-                FullName = "Доктор Иванов",
-                Phone = "+7 901 111-11-11",
-                Login = "vet",
-                Password = "vet",
-                Role = UserRole.Veterenar
-            }
-        ];
-    }
-
-    public static class SessionObject
-    {
-        private static User? _currentUser;
-
-        public static User? CurrentUser
-        {
-            get => _currentUser;
-            set
-            {
-                _currentUser = value;
-                Console.WriteLine($"CurrentUser изменён: {value?.Login ?? "Anonim"}");
-            }
-        }
-
-        public static bool IsAdmin => CurrentUser?.Role == UserRole.Admin;
-        public static bool IsVolonteer => CurrentUser?.Role == UserRole.Volonteer;
-        public static bool IsClient => CurrentUser?.Role == UserRole.Client;
-        public static bool IsVeterenar => CurrentUser?.Role == UserRole.Veterenar;
-        public static bool IsAnonymous => CurrentUser is null;
-    }
-
-    public static class AnimalStore
-    {
-        public static List<AnimalItem> Animals { get; } =
-        [
-            new("Белка", "A-104", "Собака", "Лабрадор", "Самка", "Серый", "Средний", "3 года", "24 кг", "Вакцинация от бешенства", "В приюте", "Не прикреплено"),
-            new("Рекс", "A-107", "Собака", "Овчарка", "Самец", "Черно-рыжий", "Крупный", "5 лет", "31 кг", "Вакцинация выполнена", "В приюте", "Не прикреплено"),
-            new("Барсик", "A-112", "Кошка", "Британская", "Самец", "Серый", "Средний", "2 года", "5 кг", "Наблюдение после лечения", "На лечении", "Не прикреплено"),
-            new("Мурка", "A-118", "Кошка", "Дворовая", "Самка", "Черно-белый", "Мелкий", "1 год", "4 кг", "Прививки отсутствуют", "Ожидает семью", "Не прикреплено"),
-            new("Лада", "A-121", "Собака", "Метис", "Самка", "Белый", "Средний", "4 года", "18 кг", "Вакцинация выполнена", "В приюте", "Не прикреплено"),
-            new("Тузик", "A-125", "Собака", "Метис", "Самец", "Коричневый", "Крупный", "7 лет", "22 кг", "Вакцинация выполнена", "Ожидает семью", "Не прикреплено")
-        ];
-
-        public static int AdoptedCount { get; set; } = 17;
-    }
-
     private readonly ObservableCollection<AnimalItem> _filteredAnimals = [];
 
     public ShelterMainPage()
@@ -111,14 +18,17 @@ public partial class ShelterMainPage : ContentPage
         ApplyRoleUi();
         ApplyFilters();
         UpdateStats();
+        LoadRecentActivity();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
         ApplyRoleUi();
         ApplyFilters();
         UpdateStats();
+        LoadRecentActivity();
     }
 
     private void ApplyRoleUi()
@@ -156,6 +66,25 @@ public partial class ShelterMainPage : ContentPage
         AdoptedCountLabel.Text = AnimalStore.AdoptedCount.ToString();
         TreatmentCountLabel.Text = AnimalStore.Animals.Count(a => a.Status == "На лечении").ToString();
         WaitingCountLabel.Text = AnimalStore.Animals.Count(a => a.Status == "Ожидает семью").ToString();
+    }
+
+    private void LoadRecentActivity()
+    {
+        RecentRequestsView.ItemsSource = RequestStore.Requests
+            .OrderByDescending(r => r.Date)
+            .ThenByDescending(r => r.Id)
+            .Take(3)
+            .ToList();
+
+        RecentVetView.ItemsSource = VeterinaryStore.Records
+            .OrderByDescending(v => v.Date)
+            .Take(3)
+            .ToList();
+
+        RecentRequestsCountLabel.Text =
+            RequestStore.Requests.Count == 0
+                ? "Заявок пока нет"
+                : $"Всего заявок: {RequestStore.Requests.Count}";
     }
 
     private bool CanManageAnimals() =>
@@ -311,22 +240,5 @@ public partial class ShelterMainPage : ContentPage
         }
 
         await Shell.Current.GoToAsync("RequestsPage");
-    }
-
-    public sealed record AnimalItem(
-        string Name,
-        string Number,
-        string Species,
-        string Breed,
-        string Gender,
-        string Color,
-        string Size,
-        string Age,
-        string Weight,
-        string Vaccinations,
-        string Status,
-        string Photo)
-    {
-        public string Details => $"{Species} • {Breed} • {Gender} • {Age}";
     }
 }

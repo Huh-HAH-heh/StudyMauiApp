@@ -1,6 +1,3 @@
-﻿
-
-
 namespace StudyMauiApp;
 
 public partial class LoginPage : ContentPage
@@ -9,33 +6,23 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
     }
+
     private async void onLoginClicked(object? sender, EventArgs e)
     {
-        String login = LoginEntry.Text;
-        string pass = Pass.Text;
-        ShelterMainPage.User? user = null;
-        foreach (var item in ShelterMainPage.UserStore.Users)
-        {
-          
-           
-                if (item.Login== login && item.Password== pass)
-                {
-                    user = item;
-                break;
-            }
+        string login = LoginEntry.Text?.Trim() ?? "";
+        string pass = Pass.Text ?? "";
 
+        var user = UserStore.Users.FirstOrDefault(item =>
+            item.Login.Equals(login, StringComparison.OrdinalIgnoreCase) &&
+            item.Password == pass);
 
-        }
-        if (user == null)
+        if (user is null)
         {
             await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
             return;
         }
-    
 
-            ShelterMainPage.SessionObject.CurrentUser = user;
-            await Shell.Current.GoToAsync("..");
-        
-
-    } 
+        SessionObject.CurrentUser = user;
+        await Shell.Current.GoToAsync("..");
+    }
 }
