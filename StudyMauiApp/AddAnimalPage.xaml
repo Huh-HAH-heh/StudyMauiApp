@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="StudyMauiApp.AddAnimalPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Регистрация животного"
+    BackgroundColor="#F4F6F8">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="14">
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#E0E5EA"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12"
+                Padding="20">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Регистрация животного"
+                           FontSize="24"
+                           FontAttributes="Bold" />
+
+                    <Label Text="Поля из журнала учета приюта"
+                           TextColor="#69747F"
+                           FontSize="12" />
+
+                    <Entry x:Name="NameEntry"
+                           Placeholder="Кличка *" />
+
+                    <Entry x:Name="NumberEntry"
+                           Placeholder="Идентификационный номер *" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <VerticalStackLayout>
+                            <Label Text="Вид" FontSize="12" TextColor="#69747F" />
+                            <Picker x:Name="SpeciesPicker">
+                                <Picker.Items>
+                                    <x:String>Собака</x:String>
+                                    <x:String>Кошка</x:String>
+                                    <x:String>Другое</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Пол" FontSize="12" TextColor="#69747F" />
+                            <Picker x:Name="GenderPicker">
+                                <Picker.Items>
+                                    <x:String>Самка</x:String>
+                                    <x:String>Самец</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Entry x:Name="BreedEntry"
+                           Placeholder="Порода *" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Entry x:Name="ColorEntry"
+                               Placeholder="Окрас" />
+
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="Размер" FontSize="12" TextColor="#69747F" />
+                            <Picker x:Name="SizePicker">
+                                <Picker.Items>
+                                    <x:String>Мелкий</x:String>
+                                    <x:String>Средний</x:String>
+                                    <x:String>Крупный</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Entry x:Name="AgeEntry"
+                               Placeholder="Возраст, например 2 года" />
+
+                        <Entry x:Name="WeightEntry"
+                               Placeholder="Вес, например 12 кг" />
+                    </Grid>
+
+                    <Editor x:Name="VaccinationsEditor"
+                            Placeholder="Информация о прививках"
+                            AutoSize="TextChanges"
+                            MinimumHeightRequest="80" />
+
+                    <Border
+                        BackgroundColor="#F8FAFC"
+                        Stroke="#E3E8ED"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="10">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <Label x:Name="PhotoLabel"
+                                   Text="Фото не выбрано"
+                                   TextColor="#69747F"
+                                   VerticalTextAlignment="Center" />
+                            <Button Grid.Column="1"
+                                    Text="Выбрать фото"
+                                    Clicked="OnPickPhotoClicked"
+                                    BackgroundColor="#E9EEF3"
+                                    TextColor="#20252B"
+                                    CornerRadius="8" />
+                        </Grid>
+                    </Border>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Отмена"
+                                Clicked="OnCancelClicked"
+                                BackgroundColor="#E9EEF3"
+                                TextColor="#20252B"
+                                CornerRadius="8" />
+
+                        <Button Grid.Column="1"
+                                Text="Зарегистрировать"
+                                Clicked="OnSaveClicked"
+                                BackgroundColor="#2F80ED"
+                                TextColor="White"
+                                CornerRadius="8" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

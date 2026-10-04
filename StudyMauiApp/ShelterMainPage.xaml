@@ -40,7 +40,6 @@
 
     <Grid RowDefinitions="Auto,Auto,*">
 
-        <!-- Верхняя панель -->
         <Border Grid.Row="0" BackgroundColor="#17212B" StrokeThickness="0" Padding="20,14">
             <Grid ColumnDefinitions="*,Auto">
                 <VerticalStackLayout Spacing="2">
@@ -54,20 +53,37 @@
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                    <VerticalStackLayout x:Name="UserInfo" Spacing="1" VerticalOptions="Center">
+                        <Label x:Name="CurrentUserLabel"
+                               TextColor="White"
+                               FontSize="11"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="End"
+                               IsVisible="False" />
+                        <Label x:Name="CurrentRoleLabel"
+                               TextColor="#B9C4CE"
+                               FontSize="9"
+                               HorizontalTextAlignment="End"
+                               IsVisible="False" />
+                    </VerticalStackLayout>
+
                     <Button
-                            x:Name="LoginButton"
-                            Text="Login"
-                            BackgroundColor="#2F80ED"
-                            TextColor="White"
-                            CornerRadius="8"
-                            Padding="14,7" />
+                        x:Name="LoginButton"
+                        Text="Войти"
+                        BackgroundColor="#2F80ED"
+                        TextColor="White"
+                        CornerRadius="8"
+                        Padding="14,7" />
+
                     <Button Text="Главная"
                             Clicked="OnHomeClicked"
                             BackgroundColor="#2F80ED"
                             TextColor="White"
                             CornerRadius="8"
                             Padding="14,7" />
-                    <Button Text="Заявки"
+
+                    <Button x:Name="RequestsNavButton"
+                            Text="Заявки"
                             Clicked="OnRequestsClicked"
                             BackgroundColor="Transparent"
                             TextColor="White"
@@ -75,63 +91,94 @@
                             BorderWidth="1"
                             CornerRadius="8"
                             Padding="14,7" />
-                    <Button Text="Отчеты"
+
+                    <Button x:Name="ReportsNavButton"
+                            Text="Отчеты"
                             Clicked="OnReportsClicked"
                             BackgroundColor="Transparent"
                             TextColor="White"
                             BorderColor="#61707D"
                             BorderWidth="1"
                             CornerRadius="8"
-                            Padding="14,7" />
+                            Padding="14,7"
+                            IsVisible="False" />
                 </HorizontalStackLayout>
             </Grid>
         </Border>
 
-        <!-- Панель инструментов -->
         <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
             <HorizontalStackLayout Padding="20,12" Spacing="10">
-                <Button Text="+ Добавить животное" Style="{StaticResource ToolButton}" Clicked="OnAddAnimalClicked" />
-                <Button Text="Зарегистрировать заявку" Style="{StaticResource ToolButton}" Clicked="OnAddRequestClicked" />
-                <Button Text="Ветеринарная запись" Style="{StaticResource ToolButton}" Clicked="OnVetClicked" />
-                <Button Text="Сформировать отчет" Style="{StaticResource ToolButton}" Clicked="OnReportsClicked" />
+                <Button x:Name="AddAnimalButton"
+                        Text="+ Добавить животное"
+                        Style="{StaticResource ToolButton}"
+                        Clicked="OnAddAnimalClicked"
+                        IsVisible="False" />
+
+                <Button x:Name="RequestButton"
+                        Text="Зарегистрировать заявку"
+                        Style="{StaticResource ToolButton}"
+                        Clicked="OnAddRequestClicked"
+                        IsVisible="False" />
+
+                <Button x:Name="VetButton"
+                        Text="Ветеринарная запись"
+                        Style="{StaticResource ToolButton}"
+                        Clicked="OnVetClicked"
+                        IsVisible="False" />
+
+                <Button x:Name="ReportsButton"
+                        Text="Сформировать отчет"
+                        Style="{StaticResource ToolButton}"
+                        Clicked="OnReportsClicked"
+                        IsVisible="False" />
             </HorizontalStackLayout>
         </ScrollView>
 
         <ScrollView Grid.Row="2">
             <VerticalStackLayout Padding="20,4,20,30" Spacing="16">
 
-                <!-- Статистика -->
                 <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="12">
                     <Border Grid.Column="0" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="3">
-                            <Label Text="42" FontSize="28" FontAttributes="Bold" TextColor="#2F80ED" />
+                            <Label x:Name="AnimalsCountLabel"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="#2F80ED" />
                             <Label Text="Животных в приюте" Style="{StaticResource Muted}" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Column="1" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="3">
-                            <Label Text="17" FontSize="28" FontAttributes="Bold" TextColor="#27AE60" />
+                            <Label x:Name="AdoptedCountLabel"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="#27AE60" />
                             <Label Text="Отданы в семьи" Style="{StaticResource Muted}" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Column="2" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="3">
-                            <Label Text="6" FontSize="28" FontAttributes="Bold" TextColor="#F2994A" />
+                            <Label x:Name="TreatmentCountLabel"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="#F2994A" />
                             <Label Text="На лечении" Style="{StaticResource Muted}" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Column="3" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="3">
-                            <Label Text="9" FontSize="28" FontAttributes="Bold" TextColor="#9B51E0" />
+                            <Label x:Name="WaitingCountLabel"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="#9B51E0" />
                             <Label Text="Ожидают семью" Style="{StaticResource Muted}" />
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
 
-                <!-- Фильтры и список -->
                 <Grid ColumnDefinitions="1.35*,2*" ColumnSpacing="16">
 
                     <Border Grid.Column="0" Style="{StaticResource Card}">
@@ -247,7 +294,6 @@
                     </Border>
                 </Grid>
 
-                <!-- Заявки и ветеринария -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
                     <Border Grid.Column="0" Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="8">
