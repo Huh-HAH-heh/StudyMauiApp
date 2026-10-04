@@ -7,10 +7,6 @@ public partial class AddAnimalPage : ContentPage
     public AddAnimalPage()
     {
         InitializeComponent();
-
-        SpeciesPicker.SelectedIndex = 0;
-        GenderPicker.SelectedIndex = 0;
-        SizePicker.SelectedIndex = 1;
         AdmissionDatePicker.Date = DateTime.Today;
     }
 
@@ -48,16 +44,17 @@ public partial class AddAnimalPage : ContentPage
 
         string name = NameEntry.Text?.Trim() ?? "";
         string number = NumberEntry.Text?.Trim() ?? "";
-        string species = SpeciesPicker.SelectedItem?.ToString() ?? "";
-        string gender = GenderPicker.SelectedItem?.ToString() ?? "";
+        string species = SpeciesEntry.Text?.Trim() ?? "";
+        string gender = GenderEntry.Text?.Trim() ?? "";
         string breed = BreedEntry.Text?.Trim() ?? "";
         string color = ColorEntry.Text?.Trim() ?? "";
-        string size = SizePicker.SelectedItem?.ToString() ?? "";
+        string size = SizeEntry.Text?.Trim() ?? "";
         string age = AgeEntry.Text?.Trim() ?? "";
         string weight = WeightEntry.Text?.Trim() ?? "";
         string vaccinations = VaccinationsEditor.Text?.Trim() ?? "";
 
-        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(number))
+        if (string.IsNullOrWhiteSpace(name) ||
+            string.IsNullOrWhiteSpace(number))
         {
             ValidationLabel.Text = "Заполните обязательные поля: кличка и идентификационный номер.";
             ValidationLabel.IsVisible = true;
@@ -68,7 +65,7 @@ public partial class AddAnimalPage : ContentPage
             string.IsNullOrWhiteSpace(gender) ||
             string.IsNullOrWhiteSpace(size))
         {
-            ValidationLabel.Text = "Выберите вид, пол и размер животного.";
+            ValidationLabel.Text = "Заполните вид, пол и размер животного.";
             ValidationLabel.IsVisible = true;
             return;
         }

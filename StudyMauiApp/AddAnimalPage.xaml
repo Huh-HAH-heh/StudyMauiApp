@@ -24,13 +24,6 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <Style x:Key="InputPicker" TargetType="Picker">
-                <Setter Property="TextColor" Value="#20252B" />
-                <Setter Property="TitleColor" Value="#A0AAB5" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="VerticalOptions" Value="Center" />
-            </Style>
-
             <Style x:Key="InputDatePicker" TargetType="DatePicker">
                 <Setter Property="TextColor" Value="#20252B" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
@@ -87,31 +80,20 @@
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="5">
-                            <Label Text="Вид животного" FontSize="12" TextColor="#69747F" />
+                            <Label Text="Вид животного *" FontSize="12" TextColor="#69747F" />
                             <Border Style="{StaticResource InputFieldBorder}">
-                                <Picker x:Name="SpeciesPicker"
-                                        Style="{StaticResource InputPicker}"
-                                        Title="Выберите вид">
-                                    <Picker.Items>
-                                        <x:String>Собака</x:String>
-                                        <x:String>Кошка</x:String>
-                                        <x:String>Другое</x:String>
-                                    </Picker.Items>
-                                </Picker>
+                                <Entry x:Name="SpeciesEntry"
+                                       Style="{StaticResource InputEntry}"
+                                       Placeholder="Например: Собака" />
                             </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5">
-                            <Label Text="Пол" FontSize="12" TextColor="#69747F" />
+                            <Label Text="Пол *" FontSize="12" TextColor="#69747F" />
                             <Border Style="{StaticResource InputFieldBorder}">
-                                <Picker x:Name="GenderPicker"
-                                        Style="{StaticResource InputPicker}"
-                                        Title="Выберите пол">
-                                    <Picker.Items>
-                                        <x:String>Самка</x:String>
-                                        <x:String>Самец</x:String>
-                                    </Picker.Items>
-                                </Picker>
+                                <Entry x:Name="GenderEntry"
+                                       Style="{StaticResource InputEntry}"
+                                       Placeholder="Например: Самец" />
                             </Border>
                         </VerticalStackLayout>
 
@@ -134,17 +116,11 @@
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="3" Grid.Column="0" Spacing="5">
-                            <Label Text="Размер" FontSize="12" TextColor="#69747F" />
+                            <Label Text="Размер *" FontSize="12" TextColor="#69747F" />
                             <Border Style="{StaticResource InputFieldBorder}">
-                                <Picker x:Name="SizePicker"
-                                        Style="{StaticResource InputPicker}"
-                                        Title="Выберите размер">
-                                    <Picker.Items>
-                                        <x:String>Мелкий</x:String>
-                                        <x:String>Средний</x:String>
-                                        <x:String>Крупный</x:String>
-                                    </Picker.Items>
-                                </Picker>
+                                <Entry x:Name="SizeEntry"
+                                       Style="{StaticResource InputEntry}"
+                                       Placeholder="Например: крупный" />
                             </Border>
                         </VerticalStackLayout>
 
