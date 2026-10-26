@@ -1,0 +1,108 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'StudyMauiApp/**'
+      - '.github/workflows/android-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-android:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install .NET SDK 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Install Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: '17'
+
+      - name: Install Android MAUI workload
+        shell: pwsh
+        run: dotnet workload install maui-android
+
+      - name: Restore project
+        shell: pwsh
+        run: dotnet restore StudyMauiApp/StudyMauiApp.csproj
+
+      - name: Build and sign APK
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $project = 'StudyMauiApp/StudyMauiApp.csproj'
+          $keytoolCommand = Get-Command keytool.exe -ErrorAction Stop
+          $keytool = $keytoolCommand.Source
+          $keystore = Join-Path $env:RUNNER_TEMP 'studymauiapp.keystore'
+          $passwordBytes = [System.Security.Cryptography.RandomNumberGenerator]::GetBytes(32)
+          $env:ANDROID_KEYSTORE_PASSWORD = [System.Convert]::ToHexString($passwordBytes)
+          [System.Array]::Clear($passwordBytes, 0, $passwordBytes.Length)
+
+          $keyArgs = @(
+            '-genkeypair', '-noprompt', '-v',
+            '-keystore', $keystore,
+            '-alias', 'studymauiapp',
+            '-storepass', $env:ANDROID_KEYSTORE_PASSWORD,
+            '-keypass', $env:ANDROID_KEYSTORE_PASSWORD,
+            '-keyalg', 'RSA', '-keysize', '2048', '-validity', '10000',
+            '-dname', 'CN=StudyMauiApp, OU=Build, O=StudyMauiApp, L=Build, ST=Build, C=US'
+          )
+          & $keytool @keyArgs
+          if ($LASTEXITCODE -ne 0) { throw "keytool failed with exit code $LASTEXITCODE." }
+
+          $publishArgs = @(
+            'publish', $project, '-f', 'net9.0-android', '-c', 'Release',
+            '-p:AndroidPackageFormats=apk',
+            '-p:AndroidCreatePackagePerAbi=false',
+            '-p:AndroidKeyStore=true',
+            "-p:AndroidSigningKeyStore=$keystore",
+            '-p:AndroidSigningKeyAlias=studymauiapp',
+            '-p:AndroidSigningStorePass=env:ANDROID_KEYSTORE_PASSWORD',
+            '-p:AndroidSigningKeyPass=env:ANDROID_KEYSTORE_PASSWORD'
+          )
+          & dotnet @publishArgs
+          if ($LASTEXITCODE -ne 0) { throw "dotnet publish failed with exit code $LASTEXITCODE." }
+
+          $androidOutput = Join-Path (Split-Path -Parent $project) 'bin\Release\net9.0-android'
+          $apk = Get-ChildItem -LiteralPath $androidOutput -Filter '*.apk' -File -Recurse |
+            Where-Object { $_.Name -match '(?i)signed.*\.apk$' } |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $apk) { throw "Signed APK not found under $androidOutput." }
+
+          Copy-Item -LiteralPath $apk.FullName -Destination (Join-Path $env:GITHUB_WORKSPACE 'StudyMauiApp.apk') -Force
+          Remove-Item Env:ANDROID_KEYSTORE_PASSWORD -ErrorAction SilentlyContinue
+          Write-Host "Created signed APK: StudyMauiApp.apk"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: StudyMauiApp-APK
+          path: StudyMauiApp.apk
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish APK as GitHub prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-build-${{ github.run_number }}
+          name: StudyMauiApp Android APK #${{ github.run_number }}
+          body: |
+            Signed Android APK built from commit ${{ github.sha }}.
+
+            Note: this automated build uses a temporary signing key. To install a later build over this one, a persistent signing key must be configured; otherwise uninstall the previous app before installing the new APK.
+          prerelease: true
+          files: StudyMauiApp.apk
